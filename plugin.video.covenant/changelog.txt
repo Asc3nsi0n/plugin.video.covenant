@@ -1,3 +1,6 @@
+[B]1.1.6[/B]
+- Added alluc provider (thanks to weekendsource)
+
 [B]1.1.5[/B]
 - Dayt update
 - Onseries bug fix
