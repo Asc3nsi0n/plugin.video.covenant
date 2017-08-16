@@ -649,7 +649,7 @@ class movies:
         self.meta = []
         total = len(self.list)
 
-        self.fanart_tv_headers = {'api-key': 'NTg2MTE4YmUxYWM2NzNmNzQ5NjNjYzI4NGQ0NmJkOGU='.decode('base64')}
+        self.fanart_tv_headers = {'api-key': 'NDZkZmMyN2M1MmE0YTc3MjY3NWQ4ZTMyYjdiY2E2OGU='.decode('base64')}
         if not self.fanart_tv_user == '':
             self.fanart_tv_headers.update({'client-key': self.fanart_tv_user})
 

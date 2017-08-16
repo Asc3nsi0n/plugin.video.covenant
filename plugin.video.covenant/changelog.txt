@@ -1,3 +1,9 @@
+[B]1.1.8[/B]
+- CF fix (thanks to gujal)
+- added alluc to DE sources
+- new fanart api key
+- deleted hidded option from non password fields in settings.xml
+
 [B]1.1.7[/B]
 - Updated dizigold urls
 - Fixed streamlord
