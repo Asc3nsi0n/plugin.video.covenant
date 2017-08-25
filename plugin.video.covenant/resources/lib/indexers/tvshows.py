@@ -952,11 +952,9 @@ class tvshows:
             fanart = client.replaceHTMLCodes(fanart)
             fanart = fanart.encode('utf-8')
 
-
             try:
                 artmeta = True
-                if self.fanart_tv_user == '': raise Exception()
-
+                #if self.fanart_tv_user == '': raise Exception()
                 art = client.request(self.fanart_tv_art_link % tvdb, headers=self.fanart_tv_headers, timeout='10', error=True)
                 try: art = json.loads(art)
                 except: artmeta = False
