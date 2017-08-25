@@ -1,3 +1,9 @@
+[B]1.1.9[/B]
+- updated streamflix url
+- set default action to Directory
+- added gostream source
+- added container refreshs to syncronise watched status with Trakt (thanks to rw86)
+
 [B]1.1.8[/B]
 - CF fix (thanks to gujal)
 - added alluc to DE sources
