@@ -804,3 +804,15 @@ msgctxt "#32565"
 msgid "Include episodes with unknown air dates"
 msgstr "Episoden mit unbekanntem Ausstrahlungsdatum einbeziehen"
 
+msgctxt "#32570"
+msgid "Show unaired seasons/episodes"
+msgstr "Noch nicht ausgestrahlte Staffeln/Episoden anzeigen"
+
+msgctxt "#32371"
+msgid "When playback ends..."
+msgstr "Wenn Wiedergabe ended..."
+
+msgctxt "#32373"
+msgid "Force container refresh"
+msgstr "Container aktualisieren"
+
