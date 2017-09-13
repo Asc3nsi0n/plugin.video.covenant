@@ -573,6 +573,17 @@ msgstr "Dans ce Cas Utilisez vos Propre Sous-Titres"
 msgctxt "#32360"
 msgid "Providers Language"
 msgstr "Langue de la sources"
+msgctxt "#32363"
+msgid "HEVC"
+msgstr "HEVC"
+
+msgctxt "#32372"
+msgid "When playback ends..."
+msgstr "Lorsque la lecture se termine..."
+
+msgctxt "#32373"
+msgid "Force container refresh"
+msgstr "Forcer l'actualisation du conteneur"
 
 msgctxt "#32401"
 msgid "No stream available"
@@ -814,12 +825,7 @@ msgctxt "#32571"
 msgid "Hide movies in cinema"
 msgstr "Masquer les films au cinéma"
 
-msgctxt "#32372"
-msgid "When playback ends..."
-msgstr "Lorsque la lecture se termine..."
-
-msgctxt "#32373"
-msgid "Force container refresh"
-msgstr "Forcer l'actualisation du conteneur"
-
+msgctxt "#32572"
+msgid "Protected Link. Please enter account credentials in the settings."
+msgstr "Lien protégé. Entrez les données du compte dans les paramètres svp."
 

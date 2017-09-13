@@ -14,9 +14,9 @@
         <setting id="showunaired" type="bool" label="32570" default="true" />
         <setting id="hidecinema" type="bool" label="32571" default="false" />
         <setting type="lsep" label="32319" />
-        <setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324" default="1" />
-        <setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-9,)+eq(-8,1)" />
-        <setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-10,)|eq(-9,0)" />
+        <setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324|32580" default="1" />
+        <setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-11,)" />  
+        <setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-12,)" />
         <setting id="lists.widget" type="enum" label="32329" lvalues="32302|32301" default="1" />
     </category>
     <category label="32330">
@@ -51,6 +51,7 @@
         <setting id="provider.dizigold" type="bool" label="DIZIGOLD" default="true" />
         <setting id="provider.dltube" type="bool" label="DLTUBE" default="true" />
         <setting id="provider.einthusan" type="bool" label="EINTHUSAN" default="true" />
+        <setting id="provider.flixtor" type="bool" label="FLIXTOR" default="true" />
         <setting id="provider.genvideo" type="bool" label="GENVIDEO" default="true" />
         <setting id="provider.gogoanime" type="bool" label="GOGOANIME" default="true" />
         <setting id="provider.gostream" type="bool" label="GOSTREAM" default="true" />
@@ -121,15 +122,19 @@
         <setting id="provider.horrorkino" type="bool" label="HORRORKINO" default="true" />
         <setting id="provider.iload" type="bool" label="ILOAD" default="true" />
         <setting id="provider.kinodogs" type="bool" label="KINODOGS" default="true" />
+        <setting id="provider.kinoking" type="bool" label="KINOKING" default="true" />
         <setting id="provider.kinow" type="bool" label="KINOW" default="true" />
         <setting id="provider.kinox" type="bool" label="KINOX" default="true" />
-        <setting id="provider.meinkino" type="bool" label="MEINKINO" default="true" />
+        <setting id="provider.movie2k-ac" type="bool" label="MOVIE2K-AC" default="true" />
+        <setting id="provider.movie2k-ag" type="bool" label="MOVIE2K-AG" default="true" />
+        <setting id="provider.movie2z" type="bool" label="MOVIE2Z" default="true" />
         <setting id="provider.movie4k" type="bool" label="MOVIE4K" default="true" />
         <setting id="provider.moviesever" type="bool" label="MOVIESEVER" default="true" />
+        <setting id="provider.movietown" type="bool" label="MOVIETOWN" default="true" />
         <setting id="provider.netzkino" type="bool" label="NETZKINO" default="true" />
         <setting id="provider.proxer" type="bool" label="PROXER" default="true" />
         <setting id="provider.pureanime" type="bool" label="PUREANIME" default="true" />
-        <setting id="provider.serienstream" type="bool" label="SERIENSTREAM" default="true" />
+        <setting id="provider.serienstream" type="bool" label="SERIENSTREAM" default="false" />
         <setting id="provider.seriesever" type="bool" label="SERIESEVER" default="true" />
         <setting id="provider.streamdream" type="bool" label="STREAMDREAM" default="true" />
         <setting id="provider.streamflix" type="bool" label="STREAMFLIX" default="true" />
@@ -202,6 +207,10 @@
         <setting type="lsep" label="Ororo.tv" />
         <setting id="ororo.user" type="text" label="32304" default="" />
         <setting id="ororo.pass" type="text" option="hidden" label="32307" default="" />
+        <setting type="sep" />
+        <setting type="lsep" label="SerienStream.to" />
+        <setting id="serienstream.user" type="text" label="32304" default="" />
+        <setting id="serienstream.pass" type="text" label="32307" default="" />
         <setting type="sep" />
         <setting type="lsep" label="Seriesever.net" />
         <setting id="seriesever.user" type="text" label="32303" default="" />

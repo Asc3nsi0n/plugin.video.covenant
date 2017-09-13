@@ -571,6 +571,14 @@ msgctxt "#32363"
 msgid "HEVC"
 msgstr ""
 
+msgctxt "#32372"
+msgid "When playback ends..."
+msgstr ""
+
+msgctxt "#32373"
+msgid "Force container refresh"
+msgstr ""
+
 msgctxt "#32401"
 msgid "No stream available"
 msgstr ""
@@ -818,3 +826,8 @@ msgstr ""
 msgctxt "#32373"
 msgid "Force container refresh"
 msgstr ""
+
+msgctxt "#32580"
+msgid "Films/TV Movies"
+msgstr ""
+
