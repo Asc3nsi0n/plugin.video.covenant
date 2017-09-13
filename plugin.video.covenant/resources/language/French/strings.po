@@ -814,4 +814,12 @@ msgctxt "#32571"
 msgid "Hide movies in cinema"
 msgstr "Masquer les films au cinéma"
 
+msgctxt "#32372"
+msgid "When playback ends..."
+msgstr "Lorsque la lecture se termine..."
+
+msgctxt "#32373"
+msgid "Force container refresh"
+msgstr "Forcer l'actualisation du conteneur"
+
 

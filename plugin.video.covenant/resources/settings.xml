@@ -25,6 +25,7 @@
         <setting type="lsep" label="32338" />
         <setting id="hosts.quality" type="enum" label="32339" values="4K|1440p|1080p|720p|480p" default="0" />
         <setting id="autoplay.sd" type="bool" label="32340" default="false" />
+        <setting id="HEVC" type="bool" label="32363" default="true" />
         <setting id="hosts.captcha" type="bool" label="32341" default="true" />
         <setting id="hosts.sort.provider" type="bool" label="32342" default="false" />
         <setting type="lsep" label="32343" />
@@ -147,11 +148,13 @@
         <setting id="provider.streamay" type="bool" label="STREAMAY" default="true" />
         <setting id="provider.streamingseries" type="bool" label="STREAMINGSERIES" default="true" />
         <setting label="Polish" type="lsep" />
+        <setting id="provider.allucpl" type="bool" label="ALLUC" default="true" />
         <setting id="provider.alltube" type="bool" label="ALLTUBE" default="true" />
         <setting id="provider.filmyto" type="bool" label="FILMYTO" default="true" />
         <setting id="provider.filister" type="bool" label="FILISTER" default="true" />
         <setting id="provider.cdahd" type="bool" label="CDAHD" default="true" />
         <setting id="provider.szukajkatv" type="bool" label="SZUKAJKATV" default="true" />
+        <setting id="provider.trt" type="bool" label="TRT" default="true" />
         <setting label="Korean" type="lsep" />
         <setting id="provider.drama4u" type="bool" label="DRAMA4U" default="true" />
         <setting id="provider.dramabus" type="bool" label="DRAMABUS" default="true" />
@@ -197,7 +200,7 @@
         <setting id="streamlord.pass" type="text" option="hidden" label="32307" default="" />
         <setting type="sep" />
         <setting type="lsep" label="Ororo.tv" />
-        <setting id="ororo.user" type="text" label="32304" option="hidden" default="" />
+        <setting id="ororo.user" type="text" label="32304" default="" />
         <setting id="ororo.pass" type="text" option="hidden" label="32307" default="" />
         <setting type="sep" />
         <setting type="lsep" label="Seriesever.net" />
@@ -205,7 +208,7 @@
         <setting id="seriesever.pass" type="text" option="hidden" label="32307" default="" />
         <setting type="sep" />
         <setting type="lsep" label="ALLUC" />
-        <setting id="alluc.api" type="text" option="hidden" label="32309" default="" />
+        <setting id="alluc.api" type="text" label="32309" default="" />
         <setting id="alluc.download" type="bool" label="32009" default="false" />        
     </category>
     <category label="32541">

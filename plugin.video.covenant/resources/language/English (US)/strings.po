@@ -567,6 +567,10 @@ msgctxt "#32360"
 msgid "Providers Language"
 msgstr ""
 
+msgctxt "#32363"
+msgid "HEVC"
+msgstr ""
+
 msgctxt "#32401"
 msgid "No stream available"
 msgstr ""
