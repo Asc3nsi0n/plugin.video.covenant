@@ -831,3 +831,7 @@ msgctxt "#32580"
 msgid "Films/TV Movies"
 msgstr ""
 
+msgctxt "#32581"
+msgid "Results Limit"
+msgstr ""
+

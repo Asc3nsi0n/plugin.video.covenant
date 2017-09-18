@@ -32,8 +32,8 @@ class source:
         self.base_link = 'https://www.alluc.ee'
         self.search_link = '/api/search/%s/?apikey=%s&getmeta=0&query=%s&count=%d&from=%d'
         self.types = ['stream']
-        self.streamLimit = 200
-        self.streamIncrease = 100
+        self.streamLimit = int(control.setting('alluc.limit'))
+        self.streamIncrease = int(control.setting('alluc.limit')) / 2
         self.api = control.setting('alluc.api')
         self.debrid = control.setting('alluc.download')
         if self.debrid == 'true': self.types = ['stream', 'download']
