@@ -20,6 +20,8 @@
 import re
 import urllib
 import urlparse
+import itertools
+import HTMLParser
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
@@ -31,12 +33,11 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
-        self.domains = ['kinoking.to']
-        self.base_link = 'https://kinoking.to'
+        self.domains = ['lichtspielhaus.stream']
+        self.base_link = 'http://lichtspielhaus.stream'
         self.search_link = '/?s=%s'
-        self.get_link = '/links/%s'
 
-    def movie(self, imdb, title, localtitle, aliases, year):        
+    def movie(self, imdb, title, localtitle, aliases, year):
         try:
             url = self.__search([localtitle] + source_utils.aliases_to_array(aliases))
             if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases))
@@ -60,14 +61,13 @@ class source:
             s = '-%sx%s/' % (season, episode)
 
             url = url.rstrip('/')
-            url = url + s
-            url = urlparse.urljoin(self.base_link, url)
+            url = '/episode' + url + s
 
             return url
         except:
             return
 
-    def sources(self, url, hostDict, hostprDict):        
+    def sources(self, url, hostDict, hostprDict):
         sources = []
 
         try:
@@ -75,35 +75,36 @@ class source:
                 return sources
 
             query = urlparse.urljoin(self.base_link, url)
-
             r = client.request(query)
 
-            r = dom_parser.parse_dom(r, 'div', attrs={'id': 'downloads'})
-            r = dom_parser.parse_dom(r, 'table')
-            r = dom_parser.parse_dom(r, 'tbody')
-            r = dom_parser.parse_dom(r, 'tr')
+            r = dom_parser.parse_dom(r, 'div', attrs={'class': 'TpRwCont'})
+            r = dom_parser.parse_dom(r, 'main')
 
-            for i in r:
+            options1 = dom_parser.parse_dom(r, 'li', attrs={'class': 'STPb'})
+            options2 = dom_parser.parse_dom(r, 'div', attrs={'class': 'TPlayerTb'})
 
-                if re.search('German', i[1]):
+            for o1,o2 in itertools.izip(options1,options2):
+                if 'trailer' in o1[1].lower():
+                    continue
+                elif '1080p' in o1[1].lower():
+                    quality = '1080p'
+                elif '720p' in o1[1].lower():
+                    quality = 'HD'
+                else:
+                    quality = 'SD'
 
-                    hoster = re.search('(?<=domain=)(.*?)(?=\")', i[1])
-                    hoster = hoster.group().lower()
+                s = '(?<=src=\")(.*?)(?=\")'
+                if re.match(s, o2[1]) is not None:
+                    url = re.search(s, o2[1]).group()
+                else:
+                    h = HTMLParser.HTMLParser()
+                    h = h.unescape(o2[1])
+                    url = re.search(s, h).group()
 
-                    valid, hoster = source_utils.is_host_valid(hoster, hostDict)
-                    if not valid: continue
+                valid, hoster = source_utils.is_host_valid(url, hostDict)
+                if not valid: continue
 
-                    link = re.search('(?<=links/)(.*?)(?=/)', i[1])
-                    link = link.group()
-
-                    if re.search('<td>HD</td>', i[1]):
-                        quality = 'HD'
-                    else:
-                        quality = 'SD'
-
-                    url = self.__get_link(link)
-
-                    sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': url, 'direct': False, 'debridonly': False})
+                sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': url, 'direct': False, 'debridonly': False})
 
             return sources
         except:
@@ -112,7 +113,7 @@ class source:
     def resolve(self, url):
         return url
 
-    def __search(self, titles):        
+    def __search(self, titles):
         try:
             query = self.search_link % (urllib.quote_plus(cleantitle.query(titles[0])))
             query = urlparse.urljoin(self.base_link, query)
@@ -121,35 +122,14 @@ class source:
 
             r = client.request(query)
 
-            r = dom_parser.parse_dom(r, 'article')
-            r = dom_parser.parse_dom(r, 'div', attrs={'class': 'title'})
-            r = dom_parser.parse_dom(r, 'a', req='href')
+            r = dom_parser.parse_dom(r, 'ul', attrs={'class': 'MovieList'})
+            r = dom_parser.parse_dom(r, 'li', attrs={'class': 'TPostMv'})
+            r = dom_parser.parse_dom(r, 'a')
 
             for i in r:
-                title = client.replaceHTMLCodes(r[0][1])
-                title = cleantitle.get(title)
-
+                title = dom_parser.parse_dom(i, 'h2', attrs={'class': 'Title'})
+                title = cleantitle.get(title[0][1])
                 if title in t:
                     return source_utils.strip_domain(i[0]['href'])
-            
-            return
-        except:
-            return
-
-    def __get_link(self, link):
-        try:
-            if not link:
-                return
-
-            query = self.get_link % link
-            query = urlparse.urljoin(self.base_link, query)
-
-            r = client.request(query)
-
-            r = dom_parser.parse_dom(r, 'div', attrs={'class': 'boton'})
-            r = dom_parser.parse_dom(r, 'a', req='href')
-            r = r[0].attrs['href']
-
-            return r
         except:
             return

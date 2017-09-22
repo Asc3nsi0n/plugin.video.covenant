@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Covenant Add-on
 
     This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 import re
 import urllib
@@ -35,10 +35,33 @@ class source:
         self.base_link = 'http://movietown.org'
         self.search_link = '/search?q=%s'
 
-    def movie(self, imdb, title, localtitle, aliases, year):        
+    def movie(self, imdb, title, localtitle, aliases, year):
         try:
             url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), year)
             if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
+            return url
+        except:
+            return
+
+    def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
+        try:
+            url = self.__search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
+            if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + source_utils.aliases_to_array(aliases), year)
+            return url
+        except:
+            return
+
+    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
+        try:
+            if not url:
+                return
+
+            s = '/seasons/%s/episodes/%s' % (season, episode)
+
+            url = url.rstrip('/')
+            url = url + s
+            url = urlparse.urljoin(self.base_link, url)
+
             return url
         except:
             return
@@ -57,13 +80,20 @@ class source:
             r = dom_parser.parse_dom(r, 'div', attrs={'id': 'ko-bind'})
             r = dom_parser.parse_dom(r, 'table', attrs={'class': 'links-table'})
             r = dom_parser.parse_dom(r, 'tbody')
-            r = dom_parser.parse_dom(r, 'td', attrs={'class': 'name'}, req='data-bind')
-
+            r = dom_parser.parse_dom(r, 'tr')
+            
             for i in r:
-                hoster = re.search("(?<=>).*$", i[1])
+                if re.search('(?<=<td>)(HD)(?=</td>)', i[1]):
+                    quality = 'HD'
+                else:
+                    quality = 'SD'
+
+                x = dom_parser.parse_dom(i, 'td', attrs={'class': 'name'}, req='data-bind')
+
+                hoster = re.search("(?<=>).*$", x[0][1])
                 hoster = hoster.group().lower()
 
-                url = re.search("http(.*?)(?=')", i[0]['data-bind'])
+                url = re.search("http(.*?)(?=')", x[0][0]['data-bind'])
                 url = url.group()
 
                 valid, hoster = source_utils.is_host_valid(hoster, hostDict)
@@ -97,7 +127,7 @@ class source:
                 if title in t:
                     x = dom_parser.parse_dom(i, 'a', req='href')
                     return source_utils.strip_domain(x[0][0]['href'])
-            
+
             return
         except:
             return

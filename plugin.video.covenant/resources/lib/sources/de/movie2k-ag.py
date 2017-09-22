@@ -97,12 +97,17 @@ class source:
             r = dom_parser.parse_dom(r, 'h2', attrs={'class': 'entry-title'})
             r = dom_parser.parse_dom(r, 'a', req='href')
 
-            title = r[0][1]
-            title = cleantitle.get(title)
+                           
+                                         
 
-            if title in t:
-                return source_utils.strip_domain(r[0][0]['href'])
-            else:
-                return
+            for i in r:
+                title = i[1]
+                if re.search('\*(?:.*?)\*', title) is not None:
+                    title = re.sub('\*(?:.*?)\*', '', title)
+                title = cleantitle.get(title)
+                if title in t:
+                    return source_utils.strip_domain(i[0]['href'])
+                else:
+                    return
         except:
             return
