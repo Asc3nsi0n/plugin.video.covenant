@@ -184,7 +184,7 @@ msgstr "Avanzamento"
 
 msgctxt "#32038"
 msgid "Episodes"
-msgstr "Epsiodi"
+msgstr "Episodi"
 
 msgctxt "#32039"
 msgid "Movie Lists"

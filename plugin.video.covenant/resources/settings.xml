@@ -8,7 +8,7 @@
         <setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
         <setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,)" />
         <setting id="api.language" type="select" label="32316" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="AUTO" />
-        <setting id="providers.lang" type="select" label="32360" values="English|German|German+English|French|French+English|Polish|Polish+English|Korean|Korean+English|Russian|Russian+English" default="English" />
+        <setting id="providers.lang" type="select" label="32360" values="English|Italian|German|German+English|French|French+English|Polish|Polish+English|Korean|Korean+English|Russian|Russian+English|Spanish|Spanish+English" default="English" />
         <setting id="flatten.tvshows" type="bool" label="32317" default="false" />
         <setting id="fanart" type="bool" label="32318" default="true" />
         <setting id="showunaired" type="bool" label="32570" default="true" />
@@ -107,6 +107,8 @@
         <setting id="provider.videoscraper" type="bool" label="VIDEOSCRAPER" default="true" />
         <setting id="provider.xmovies" type="bool" label="XMOVIES" default="true" />
         <setting id="provider.ymovies" type="bool" label="YMOVIES" default="true" />
+        <setting label="Italian" type="lsep" />
+        <setting id="provider.allucit" type="bool" label="ALLUC" default="true" />
         <setting label="German" type="lsep" />
         <setting id="provider.allucde" type="bool" label="ALLUC" default="true" />
         <setting id="provider.animebase" type="bool" label="ANIMEBASE" default="true" />
@@ -175,6 +177,11 @@
         <setting id="provider.filmix" type="bool" label="FILMIX" default="true" />
         <setting id="provider.kinoxax" type="bool" label="KINOXAX" default="true" />
         <setting id="provider.newkino" type="bool" label="NEWKINO" default="true" />
+        <setting label="Spanish" type="lsep" />
+        <setting id="provider.peliculasdk" type="bool" label="PELICULASDK" default="true" />
+        <setting id="provider.pelisplustv" type="bool" label="PELISPLUSTV" default="true" />
+        <setting id="provider.megapelistv" type="bool" label="MEGAPELIS" default="true" />
+
     </category>
     <category label="32346">
         <setting type="lsep" label="FANART.TV" />
