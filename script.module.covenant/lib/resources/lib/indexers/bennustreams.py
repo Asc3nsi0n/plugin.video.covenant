@@ -24,6 +24,7 @@ import xbmc,xbmcgui
 try: from sqlite3 import dbapi2 as database
 except: from pysqlite2 import dbapi2 as database
 
+from resources.lib.modules import debrid
 from resources.lib.modules import cache
 from resources.lib.modules import metacache
 from resources.lib.modules import client
@@ -34,6 +35,7 @@ from resources.lib.modules import workers
 from resources.lib.modules import youtube
 from resources.lib.modules import views
 from resources.lib.modules import trakt
+from resources.lib.modules import log_utils
 
 addon_id            = 'plugin.video.bennu'
 AddonTitle          = 'bennu'
@@ -383,6 +385,7 @@ class indexer:
                             quit()
 
         try:
+            
             if result == None: result = cache.get(client.request, 1, url)
             
             if enc == True:
@@ -525,17 +528,18 @@ class indexer:
         return self.list
 
     def worker(self):
+    
         if not control.setting('metadata') == 'true': return
 
-        self.imdb_info_link = 'http://www.omdbapi.com/?i=%s&plot=full&r=json'
         self.tvmaze_info_link = 'http://api.tvmaze.com/lookup/shows?thetvdb=%s'
+
         self.lang = 'en'
         self.user = ''
 
         self.meta = []
         total = len(self.list)
-        if total == 0 or total > 50: return
-
+        if total == 0: return
+        
         multi = [i['imdb'] for i in self.list]
         multi = [x for y,x in enumerate(multi) if x not in multi[:y]]
         if len(multi) == 1:
@@ -544,18 +548,27 @@ class indexer:
 
         for i in range(0, total): self.list[i].update({'metacache': False})
         self.list = metacache.fetch(self.list, self.lang, self.user)
-
+        
+        pDialog = xbmcgui.DialogProgressBG()
+        pDialog.create('MetaData Progress', '')
+        pDialog.update(0, 'MetaData Progress', 'Retrieving MetaData Information')
+        import time
+        start = time.time()
         for r in range(0, total, 50):
             threads = []
+            percent = int( ( (r) / float(total) ) * 100)
+            pDialog.update(percent, 'MetaData Progress', 'Retrieving MetaData Information')
             for i in range(r, r+50):
                 if i <= total: threads.append(workers.Thread(self.movie_info, i))
                 if i <= total: threads.append(workers.Thread(self.tv_info, i))
             [i.start() for i in threads]
             [i.join() for i in threads]
+        pDialog.close()
 
         if self.meta: 
             metacache.insert(self.meta)
             self.list = metacache.fetch(self.list, self.lang, self.user)
+            
 
     def movie_info(self, i):
         try:
@@ -623,7 +636,7 @@ class indexer:
                 cast.append({'name': person['person']['name'], 'role': person['character']})
             cast = [(person['name'], person['role']) for person in cast]
 
-            self.meta.append({'imdb': imdb, 'tmdb': '0', 'tvdb': '0', 'lang': self.lang, 'user': self.user, 'item': {'title': title, 'year': year, 'code': imdb, 'imdb': imdb, 'premiered': premiered, 'genre': genre, 'duration': duration, 'rating': rating, 'votes': votes, 'mpaa': mpaa, 'director': director, 'writer': writer, 'cast': cast, 'plot': plot}})
+            self.meta.append({'imdb': imdb, 'tmdb': '0', 'tvdb': '0', 'lang': self.lang, 'user': self.user, 'item': {'meta_title': title, 'meta_year': year, 'code': imdb, 'imdb': imdb, 'premiered': premiered, 'genre': genre, 'duration': duration, 'rating': rating, 'votes': votes, 'mpaa': mpaa, 'director': director, 'writer': writer, 'cast': cast, 'plot': plot}})
         except:
             pass
 
@@ -763,6 +776,7 @@ class indexer:
                     banner = i['banner'] if 'banner' in i else '0'
                     fanart = i['fanart'] if 'fanart' in i else '0'
                     if poster == '0': poster = addonPoster
+                    else: poster = re.sub('([a-zA-Z]+)\d+_([a-zA-Z]+)\d+,\d+,\d+,\d+', '\g<1>512_\g<2>0,0,0,512', poster)
                     if banner == '0' and poster == '0': banner = addonBanner
                     elif banner == '0': banner = poster
 
@@ -771,7 +785,11 @@ class indexer:
                     folder = i['folder'] if 'folder' in i else True
 
                     meta = dict((k,v) for k, v in i.iteritems() if not v == '0')
-
+                    
+                    if control.setting('metadata') == 'true':
+                        try: name = meta['meta_title'] + ' (%s)' % meta['meta_year'] if not meta['meta_year'] == '0' else meta['meta_title']
+                        except: pass    
+                    
                     cm = []
 
                     if content in ['movies', 'tvshows']:
@@ -886,12 +904,22 @@ class resolver:
             if len(items) == 0: return url
             if len(items) == 1: return items[0][1]
 
-            items = [('Link %s' % (int(items.index(i))+1) if i[0] == '' else i[0], i[1]) for i in items]
+            dialog_list = []
+            for i in items:
+                if i[0] != '':
+                    dialog_list += [(i[0], i[1])]
+                elif '<preset>searchsd</preset>' in i[1]:  
+                    dialog_list += [('SD (Lists provider, host & quality if available)', i[1])]
+                elif '<preset>search</preset>' in i[1]:
+                    dialog_list += [('AUTOPLAY (Best available stream - can be false at times)', i[1].replace('<preset>search</preset>','<preset>searchauto</preset>'))]
+                    if not debrid.status() == False: 
+                        dialog_list += [('RD (Real Debrid, Premiumize, etc)', i[1].replace('<preset>search</preset>','<preset>searchrd</preset>'))]
+                    dialog_list += [('HD (Lists provider, host & quality if available)', i[1])]
 
-            select = control.selectDialog([i[0] for i in items], control.infoLabel('listitem.label'))
+            select = control.selectDialog([i[0] for i in dialog_list], control.infoLabel('listitem.label'))
 
             if select == -1: return False
-            else: return items[select][1]
+            else: return dialog_list[select][1]
         except:
             pass
 
@@ -987,20 +1015,24 @@ class resolver:
 
             direct = False
 
-            quality = 'HD' if not preset == 'searchsd' else 'SD'
+            if preset == 'search': quality = 'HD'
+            elif preset == 'searchrd': quality = 'RD'
+            elif preset == 'searchauto': quality = 'AUTO'
+            else: quality = 'SD'
+            #quality = 'HD' if not preset == 'searchsd' else 'SD'
 
-            from resources.lib.modules import sources_bennu
+            from resources.lib.modules import sources
 
-            u = sources_bennu.sources().getSources(title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, quality)
+            u = sources.sources().getSourcesBennu(title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, quality)
 
             if not u == None: return u
         except:
             pass
 
         try:
-            from resources.lib.modules import sources_bennu
+            from resources.lib.modules import sources
 
-            u = sources_bennu.sources().getURISource(url)
+            u = sources.sources().getURISource(url)
 
             if not u == False: direct = False
             if u == None or u == False: raise Exception()
@@ -1051,6 +1083,7 @@ class player(xbmc.Player):
             base = url
 
             url = resolver().get(url)
+
             if url == False: return
 
             control.execute('ActivateWindow(busydialog)')
@@ -1175,4 +1208,3 @@ class bookmarks:
             dbcon.commit()
         except:
             pass
-
