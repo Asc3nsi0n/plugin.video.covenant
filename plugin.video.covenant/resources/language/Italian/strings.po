@@ -204,23 +204,23 @@ msgstr "Non è stato trovato alcun account Trakt o IMDb."
 
 msgctxt "#32043"
 msgid "[B]SETTINGS[/B] : General"
-msgstr "[B]SETTINGS[/B] : Generale"
+msgstr "[B]IMPOSTAZIONI[/B] : Generale"
 
 msgctxt "#32044"
 msgid "[B]SETTINGS[/B] : Accounts"
-msgstr "[B]SETTINGS[/B] : Account"
+msgstr "[B]IMPOSTAZIONI[/B] : Account"
 
 msgctxt "#32045"
 msgid "[B]SETTINGS[/B] : Playback"
-msgstr "[B]SETTINGS[/B] : Riproduzione"
+msgstr "[B]IMPOSTAZIONI[/B] : Riproduzione"
 
 msgctxt "#32046"
 msgid "[B]SETTINGS[/B] : Subtitles"
-msgstr "[B]SETTINGS[/B] : Sottotitoli"
+msgstr "[B]IMPOSTAZIONI[/B] : Sottotitoli"
 
 msgctxt "#32047"
 msgid "[B]SETTINGS[/B] : Providers"
-msgstr "[B]SETTINGS[/B] : Provider"
+msgstr "[B]IMPOSTAZIONI[/B] : Provider"
 
 msgctxt "#32048"
 msgid "[B]COVENANT[/B] : Downloads"

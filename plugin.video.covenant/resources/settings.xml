@@ -8,7 +8,7 @@
         <setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
         <setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,)" />
         <setting id="api.language" type="select" label="32316" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="AUTO" />
-        <setting id="providers.lang" type="select" label="32360" values="English|Italian|Italian+English|German|German+English|French|French+English|Polish|Polish+English|Korean|Korean+English|Russian|Russian+English|Spanish|Spanish+English|Greek|Greek+English" default="English" />
+        <setting id="providers.lang" type="select" label="32360" values="English|German|German+English|French|French+English|Polish|Polish+English|Korean|Korean+English|Russian|Russian+English|Spanish|Spanish+English|Italian|Italian+English|Greek|Greek+English" default="English" />
         <setting id="flatten.tvshows" type="bool" label="32317" default="false" />
         <setting id="fanart" type="bool" label="32318" default="true" />
         <setting id="showunaired" type="bool" label="32570" default="true" />
@@ -40,6 +40,7 @@
         <setting id="provider.afdah" type="bool" label="AFDAH" default="true" />
         <setting id="provider.allrls" type="bool" label="ALLRLS" default="true" />
         <setting id="provider.allucen" type="bool" label="ALLUC" default="true" />
+        <setting id="provider.allrls" type="bool" label="ALLRLS" default="true" />
         <setting id="provider.animeultima" type="bool" label="ANIMEULTIMA" default="true" />
         <setting id="provider.bmoviez" type="bool" label="BMOVIEZ" default="true" />
         <setting id="provider.bobby" type="bool" label="BOBBY" default="true" />
@@ -162,10 +163,12 @@
         <setting id="provider.allucpl" type="bool" label="ALLUC" default="true" />
         <setting id="provider.alltube" type="bool" label="ALLTUBE" default="true" />
         <setting id="provider.filmyto" type="bool" label="FILMYTO" default="true" />
-        <setting id="provider.filister" type="bool" label="FILISTER" default="true" />
+        <setting id="provider.cdax" type="bool" label="CDAX" default="true" />
         <setting id="provider.cdahd" type="bool" label="CDAHD" default="true" />
         <setting id="provider.szukajkatv" type="bool" label="SZUKAJKATV" default="true" />
         <setting id="provider.trt" type="bool" label="TRT" default="true" />
+        <setting id="provider.paczymy" type="bool" label="PACZYMY" default="true" />
+        <setting id="provider.openkatalog" type="bool" label="OPENKATALOG" default="true" />
         <setting label="Korean" type="lsep" />
         <setting id="provider.drama4u" type="bool" label="DRAMA4U" default="true" />
         <setting id="provider.dramabus" type="bool" label="DRAMABUS" default="true" />
