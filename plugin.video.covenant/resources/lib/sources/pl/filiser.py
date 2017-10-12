@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import urllib, urlparse, re
+import urllib, urlparse
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
@@ -28,14 +28,18 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['pl']
-        self.domains = ['filiser.tv']
+        self.domains = ['filiser.co']
 
-        self.base_link = 'http://filiser.tv/'
+        self.base_link = 'https://filiser.co'
         self.url_transl = 'embed?salt=%s'
         self.search_link = 'szukaj?q=%s'
         self.episode_link = '-Season-%01d-Episode-%01d'
 
-    def do_search(self, title, year, is_movie_search):
+
+    def check_titles(self, cleaned_titles, found_titles):        
+        return cleaned_titles[0] == cleantitle.get(found_titles[0]) or cleaned_titles[1] == cleantitle.get(found_titles[1])    
+    
+    def do_search(self, title, localtitle, year, is_movie_search):
         try:
             url = urlparse.urljoin(self.base_link, self.search_link)
             url = url % urllib.quote(title)
@@ -43,18 +47,21 @@ class source:
             result = result.decode('utf-8')
 
             result = client.parseDOM(result, 'ul', attrs={'id': 'resultList2'})
-            result = client.parseDOM(result[0], 'li')
+            li_list = []
+            for el in result:
+                li_list.extend(client.parseDOM(el, 'li'))
+            
 
             result = [(client.parseDOM(i, 'a', ret='href')[0],
                        client.parseDOM(i, 'div', attrs={'class': 'title'})[0],
                        (client.parseDOM(i, 'div', attrs={'class': 'title_org'}) + [None])[0],
                        client.parseDOM(i, 'div', attrs={'class': 'info'})[0],
-                       ) for i in result]
+                       ) for i in li_list]
 
             search_type = 'Film' if is_movie_search else 'Serial'
-            cleaned_title = cleantitle.get(title)
+            cleaned_titles = [cleantitle.get(title), cleantitle.get(localtitle)]                         
             # filter by name
-            result = [x for x in result if cleaned_title == cleantitle.get(self.get_first_not_none([x[2], x[1]]))]
+            result = [x for x in result if self.check_titles(cleaned_titles, [x[2], x[1]])]
             # filter by type
             result = [x for x in result if x[3].startswith(search_type)]
             # filter by year
@@ -68,14 +75,11 @@ class source:
         except :
             return
 
-    def get_first_not_none(self, collection):
-        return next(item for item in collection if item is not None)
-
     def movie(self, imdb, title, localtitle, aliases, year):
-        return self.do_search(title, year, True)
+        return self.do_search(title, localtitle, year, True)
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
-        return self.do_search(tvshowtitle, year, False)
+        return self.do_search(tvshowtitle, localtvshowtitle, year, False)
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:

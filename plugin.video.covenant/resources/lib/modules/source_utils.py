@@ -37,12 +37,16 @@ def is_anime(content, type, type_id):
         return False
 
 
-def get_release_quality(release_name):
+def get_release_quality(release_name, release_link=None):
+
     if release_name is None: return
+
     try: release_name = release_name.encode('utf-8')
     except: pass
 
     try:
+        quality = None
+        
         release_name = release_name.upper()
 
         fmt = re.sub('(.+)(\.|\(|\[|\s)(\d{4}|S\d*E\d*|S\d*)(\.|\)|\]|\s)', '', release_name)
@@ -51,10 +55,22 @@ def get_release_quality(release_name):
 
         if '1080p' in fmt: quality = '1080p'
         elif '720p' in fmt: quality = 'HD'
-        else: quality = 'SD'
-        if any(i in ['dvdscr', 'r5', 'r6'] for i in fmt): quality = 'SCR'
+        elif any(i in ['dvdscr', 'r5', 'r6'] for i in fmt): quality = 'SCR'
         elif any(i in ['camrip', 'tsrip', 'hdcam', 'hdts', 'dvdcam', 'dvdts', 'cam', 'telesync', 'ts'] for i in fmt): quality = 'CAM'
 
+        if not quality:
+            if release_link:
+                release_link = release_link.lower()
+                try: release_link = release_link.encode('utf-8')
+                except: pass
+                if '1080' in release_link: quality = '1080p'
+                elif '720' in release_link: quality = 'HD'
+                elif '.hd' in release_link: quality = 'HD'
+                else: 
+                    if any(i in ['dvdscr', 'r5', 'r6'] for i in release_link): quality = 'SCR'
+                    elif any(i in ['camrip', 'tsrip', 'hdcam', 'hdts', 'dvdcam', 'dvdts', 'cam', 'telesync', 'ts'] for i in release_link): quality = 'CAM'
+                    else: quality = 'SD'
+            else: quality = 'SD'
         info = []
         if '3d' in fmt or '.3D.' in release_name: info.append('3D')
         if any(i in ['hevc', 'h265', 'x265'] for i in fmt): info.append('HEVC')
@@ -62,6 +78,20 @@ def get_release_quality(release_name):
         return quality, info
     except:
         return 'SD', []
+        
+def check_sd_url(release_link):
+
+    try:
+        release_link = release_link.lower()
+        if '1080' in release_link: quality = '1080p'
+        elif '720' in release_link: quality = 'HD'
+        elif '.hd' in release_link: quality = 'HD'
+        elif any(i in ['dvdscr', 'r5', 'r6'] for i in release_link): quality = 'SCR'
+        elif any(i in ['camrip', 'tsrip', 'hdcam', 'hdts', 'dvdcam', 'dvdts', 'cam', 'telesync', 'ts'] for i in release_link): quality = 'CAM'
+        else: quality = 'SD'
+        return quality
+    except:
+        return 'SD'
 
 def label_to_quality(label):
     try:

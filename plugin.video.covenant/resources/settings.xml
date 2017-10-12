@@ -8,7 +8,7 @@
         <setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
         <setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,)" />
         <setting id="api.language" type="select" label="32316" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="AUTO" />
-        <setting id="providers.lang" type="select" label="32360" values="English|German|German+English|French|French+English|Polish|Polish+English|Korean|Korean+English|Russian|Russian+English" default="English" />
+        <setting id="providers.lang" type="select" label="32360" values="English|German|German+English|French|French+English|Polish|Polish+English|Korean|Korean+English|Russian|Russian+English|Spanish|Spanish+English|Italian|Italian+English|Greek|Greek+English" default="English" />
         <setting id="flatten.tvshows" type="bool" label="32317" default="false" />
         <setting id="fanart" type="bool" label="32318" default="true" />
         <setting id="showunaired" type="bool" label="32570" default="true" />
@@ -17,6 +17,7 @@
         <setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324|32580" default="1" />
         <setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-11,)" />  
         <setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-12,)" />
+        <setting id="prgr.sortorder" type="enum" label="32584" lvalues="32585|32586" default="1" visible="!eq(-13,)" />
         <setting id="lists.widget" type="enum" label="32329" lvalues="32302|32301" default="1" />
     </category>
     <category label="32330">
@@ -38,7 +39,9 @@
         <setting type="sep" />
         <setting id="provider.1movies" type="bool" label="1MOVIES" default="true" />
         <setting id="provider.afdah" type="bool" label="AFDAH" default="true" />
+        <setting id="provider.allrls" type="bool" label="ALLRLS" default="true" />
         <setting id="provider.allucen" type="bool" label="ALLUC" default="true" />
+        <setting id="provider.allrls" type="bool" label="ALLRLS" default="true" />
         <setting id="provider.animeultima" type="bool" label="ANIMEULTIMA" default="true" />
         <setting id="provider.bmoviez" type="bool" label="BMOVIEZ" default="true" />
         <setting id="provider.bobby" type="bool" label="BOBBY" default="true" />
@@ -93,6 +96,7 @@
         <setting id="provider.seriesonline" type="bool" label="SERIESONLINE" default="true" />
         <setting id="provider.solarmovie" type="bool" label="SOLARMOVIE" default="true" />
         <setting id="provider.streamlord" type="bool" label="STREAMLORD" default="true" />
+        <setting id="provider.tinklepad" type="bool" label="TINKLEPAD" default="true" />
         <setting id="provider.tinydl" type="bool" label="TINYDL" default="true" />
         <setting id="provider.tunemovie" type="bool" label="TUNEMOVIE" default="true" />
         <setting id="provider.tvbox" type="bool" label="TVBOX" default="true" />
@@ -107,6 +111,8 @@
         <setting id="provider.videoscraper" type="bool" label="VIDEOSCRAPER" default="true" />
         <setting id="provider.xmovies" type="bool" label="XMOVIES" default="true" />
         <setting id="provider.ymovies" type="bool" label="YMOVIES" default="true" />
+        <setting label="Italian" type="lsep" />
+        <setting id="provider.allucit" type="bool" label="ALLUC" default="true" />
         <setting label="German" type="lsep" />
         <setting id="provider.allucde" type="bool" label="ALLUC" default="true" />
         <setting id="provider.animebase" type="bool" label="ANIMEBASE" default="true" />
@@ -137,6 +143,7 @@
         <setting id="provider.pureanime" type="bool" label="PUREANIME" default="true" />
         <setting id="provider.serienstream" type="bool" label="SERIENSTREAM" default="false" />
         <setting id="provider.seriesever" type="bool" label="SERIESEVER" default="true" />
+        <setting id="provider.stream-to" type="bool" label="STREAM-TO" default="true" />
         <setting id="provider.streamdream" type="bool" label="STREAMDREAM" default="true" />
         <setting id="provider.streamflix" type="bool" label="STREAMFLIX" default="true" />
         <setting id="provider.streamit" type="bool" label="STREAMIT" default="true" />
@@ -157,10 +164,15 @@
         <setting id="provider.allucpl" type="bool" label="ALLUC" default="true" />
         <setting id="provider.alltube" type="bool" label="ALLTUBE" default="true" />
         <setting id="provider.filmyto" type="bool" label="FILMYTO" default="true" />
-        <setting id="provider.filister" type="bool" label="FILISTER" default="true" />
+        <setting id="provider.cdax" type="bool" label="CDAX" default="true" />
         <setting id="provider.cdahd" type="bool" label="CDAHD" default="true" />
         <setting id="provider.szukajkatv" type="bool" label="SZUKAJKATV" default="true" />
         <setting id="provider.trt" type="bool" label="TRT" default="true" />
+        <setting id="provider.paczymy" type="bool" label="PACZYMY" default="true" />
+        <setting id="provider.openkatalog" type="bool" label="OPENKATALOG" default="true" />
+        <setting id="provider.boxfilm" type="bool" label="BOXFILM" default="true" />
+        <setting id="provider.ekinomaniak" type="bool" label="EKINOMANIAK" default="true" />
+        <setting id="provider.filiser" type="bool" label="FILISER" default="true" />
         <setting label="Korean" type="lsep" />
         <setting id="provider.drama4u" type="bool" label="DRAMA4U" default="true" />
         <setting id="provider.dramabus" type="bool" label="DRAMABUS" default="true" />
@@ -175,11 +187,22 @@
         <setting id="provider.filmix" type="bool" label="FILMIX" default="true" />
         <setting id="provider.kinoxax" type="bool" label="KINOXAX" default="true" />
         <setting id="provider.newkino" type="bool" label="NEWKINO" default="true" />
+        <setting label="Spanish" type="lsep" />
+        <setting id="provider.peliculasdk" type="bool" label="PELICULASDK" default="true" />
+        <setting id="provider.pelisplustv" type="bool" label="PELISPLUSTV" default="true" />
+        <setting id="provider.megapelistv" type="bool" label="MEGAPELIS" default="true" />
+        <setting id="provider.pepecine" type="bool" label="PEPECINE" default="true" />
+        <setting label="Greek" type="lsep" />
+        <setting id="provider.gamatotv" type="bool" label="GAMATO" default="true" />
+        <setting id="provider.tainiomania" type="bool" label="TAINIOMANIA" default="true" />
+        <setting id="provider.tainiesonline" type="bool" label="TAINIESONLINE" default="true" />
+
+
     </category>
     <category label="32346">
         <setting type="lsep" label="FANART.TV" />
-        <setting type="lsep" label="Personal API keys provide quicker API responses." />
-        <setting type="lsep" label="Become a VIP member for many benefits at: https://fanart.tv/vip" />
+        <setting type="lsep" label="32582" default="" />
+        <setting type="lsep" label="32583" default="" />
         <setting id="fanart.tv.user" type="text" label="32309" default="" />
         <setting type="sep" />
         <setting type="lsep" label="TMDb" />
