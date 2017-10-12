@@ -333,7 +333,7 @@ msgstr "[B]HELP[/B]"
 
 msgctxt "#32301"
 msgid "Enabled"
-msgstr "Abiliato"
+msgstr "Abilitato"
 
 msgctxt "#32302"
 msgid "Disabled"
@@ -844,5 +844,5 @@ msgid "Recently aired"
 msgstr "Trasmessi di recente"
 
 msgctxt "#32586"
-msgstr "Recently watched"
-msgid "Visti di recente"
+msgid "Recently watched"
+msgstr "Visti di recente"

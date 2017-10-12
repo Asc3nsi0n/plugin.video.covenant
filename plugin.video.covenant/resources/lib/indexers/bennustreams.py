@@ -709,8 +709,6 @@ class indexer:
                 except: episode = '0'
 
                 self.list.append({'name': name, 'vip': vip, 'url': url, 'action': action, 'folder': folder, 'poster': image2, 'banner': '0', 'fanart': fanart2, 'content': content, 'imdb': imdb, 'tvdb': tvdb, 'tmdb': '0', 'title': title, 'originaltitle': title, 'tvshowtitle': tvshowtitle, 'year': year, 'premiered': premiered, 'season': season, 'episode': episode, 'worker': use_worker})
-                log_utils.log('Sources Returned: %s' % str(self.list), log_utils.LOGNOTICE)
-
             except:
                 pass
 
@@ -952,7 +950,6 @@ class indexer:
                     except: pass
                     try: url += '&content=%s' % urllib.quote_plus(i['content'])
                     except: pass
-                    log_utils.log('Scraping Error: Could not add %s to directory.' % str(url), log_utils.LOGERROR)
                     if i['action'] == 'plugin' and 'url' in i: url = i['url']
 
                     try: devurl = dict(urlparse.parse_qsl(urlparse.urlparse(url).query))['action']

@@ -850,3 +850,7 @@ msgstr ""
 msgctxt "#32586"
 msgid "Recently watched"
 msgstr ""
+
+msgctxt "#32587"
+msgid "Show Extra Source Info"
+msgstr ""
