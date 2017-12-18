@@ -1,7 +1,0 @@
-[B]1.2.1[/B]
-- Initial version
-- Fixed Debrid Scraping
-- Fixed Trakt Authetication
-- Fixed Clear Providers
-- Few Other Bits and Pieces Fixed
-- Bug Fixes and Error Fixes Done
