@@ -99,16 +99,16 @@ class movies:
 
 
         self.thousand_link = 'http://www.imdb.com/search/title?at=0&count=100&groups=top_1000&release_date=2000,2017&sort=moviemeter,asc&count=40&start=1'
-        self.eighties_link = 'http://www.imdb.com/list/ls025240135/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.docs_link = 'http://www.imdb.com/list/ls074480877/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.action_link = 'http://www.imdb.com/list/ls076503982/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.animated_link = 'http://www.imdb.com/list/ls074818782/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.gangster_link = 'http://www.imdb.com/list/ls068420633/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
+        self.eighties_link = 'http://www.imdb.com/search/title?count=100&keywords%3Fsort=moviemeter,asc&mode=detail&page=1&title_type=movie,tvMovie&release_date=1980,1989&sort=moviemeter,asc&ref_=kw_ref_typ'
+        self.docs_link = 'http://www.imdb.com/search/title?count=100&keywords=documentary-subject%27s-name-in-title&mode=detail&page=1&title_type=movie,tvMovie&genres=Documentary&sort=alpha,asc&ref_=kw_ref_typ'
+        self.action_link = 'http://www.imdb.com/search/title?count=100&keywords=action-hero&sort=user_rating,desc&mode=detail&page=1&title_type=movie&release_date=2000%2C2017&ref_=kw_ref_yr'
+        self.animated_link = 'http://www.imdb.com/search/title?count=100&keywords=2d-animation&sort=alpha,asc&mode=detail&page=1&title_type=movie%2Cvideo&ref_=kw_ref_typ'
+        self.gangster_link = 'http://www.imdb.com/search/title?count=100&keywords=gangster&sort=user_rating,desc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
         self.box_link = 'http://www.imdb.com/list/ls057080540/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.horror_link = 'http://www.imdb.com/list/ls000522817/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.action2_link = 'http://www.imdb.com/list/ls062082547/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.loners_link = 'http://www.imdb.com/list/ls053143856/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.remakes_link = 'http://www.imdb.com/list/ls000591773/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
+        self.horror_link = 'http://www.imdb.com/search/title?count=100&keywords=survival-horror&sort=alpha,asc&mode=detail&page=1&title_type=movie%2CtvMovie&ref_=kw_ref_typ'
+        self.action2_link = 'http://www.imdb.com/search/title?count=100&keywords=action-hero&sort=user_rating,desc&mode=detail&page=1&title_type=movie&release_date=1960%2C1999&ref_=kw_ref_yr'
+        self.loners_link = 'http://www.imdb.com/search/title?count=100&keywords=loner&sort=moviemeter,asc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.remakes_link = 'http://www.imdb.com/search/title?count=100&keywords=horror-movie-remake&sort=moviemeter,asc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
         self.spike_link = 'http://www.imdb.com/list/ls068076067/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
         self.alfred_link = 'http://www.imdb.com/list/ls068035844/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
         self.clint_link = 'http://www.imdb.com/list/ls064776757/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
@@ -118,25 +118,29 @@ class movies:
         self.mel_link = 'http://www.imdb.com/list/ls064145343/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
         self.ben_link = 'http://www.imdb.com/list/ls064146888/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
         self.martin_link = 'http://www.imdb.com/list/ls064562971/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.bond_link = 'http://www.imdb.com/list/ls074290384/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.horror2_link = 'http://www.imdb.com/list/ls000860582/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.scifi_link = 'http://www.imdb.com/list/ls000307285/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.western_link = 'http://www.imdb.com/list/ls000654277/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.cop_link = 'http://www.imdb.com/list/ls064950101/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.war_link = 'http://www.imdb.com/list/ls063040690/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
+        self.bond_link = 'http://www.imdb.com/search/title?count=100&keywords=official-james-bond-series'
+        self.horror2_link = 'http://www.imdb.com/search/title?genres=horror&explore=title_type,genres&pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=3449260402&pf_rd_r=1XFS1KBK4NWJ9KSAZSCV&pf_rd_s=center-2&pf_rd_t=15051&pf_rd_i=genre&title_type=movie&sort=user_rating,desc&ref_=adv_explore_rhs'
+        self.scifi_link = 'http://www.imdb.com/search/title?genres=sci-fi&explore=title_type,genres&pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=3449260382&pf_rd_r=0WQQE6JCA3PY3TAYEHS3&pf_rd_s=center-1&pf_rd_t=15051&pf_rd_i=genre&title_type=movie&sort=user_rating,desc&ref_=adv_explore_rhs'
+        self.western_link = 'http://www.imdb.com/search/title?count=100&keywords=b-western&sort=user_rating,desc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.cop_link = 'http://www.imdb.com/search/title?count=100&keywords=cop&sort=user_rating,desc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.war_link = 'http://www.imdb.com/search/title?count=100&keywords=war-violence&sort=user_rating,desc&mode=detail&page=1&title_type=movie&ref_=kw_ref_rt_vt'
         self.women_link = 'http://www.imdb.com/list/ls006702639/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.star_link = 'http://www.imdb.com/list/ls064750418/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.schiz_link = 'http://www.imdb.com/list/ls058306143/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
+        self.star_link = 'http://www.imdb.com/search/title?count=100&keywords=star-wars&sort=moviemeter,asc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.schiz_link = 'http://www.imdb.com/search/title?count=100&keywords=schizophrenia&sort=moviemeter,asc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
         self.sleeper_link = 'http://www.imdb.com/list/ls072566225/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.chase_link = 'http://www.imdb.com/list/ls072779857/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.political_link = 'http://www.imdb.com/list/ls063205202/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.private_link = 'http://www.imdb.com/list/ls064969930/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.true_link = 'http://www.imdb.com/list/ls072841046/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.drugs_link = 'http://www.imdb.com/list/ls000224593/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.racist_link = 'http://www.imdb.com/list/ls003616976/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.char_link = 'http://www.imdb.com/list/ls075584721/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.Existential_link = 'http://www.imdb.com/list/ls004947603/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.romance_link = 'http://www.imdb.com/list/ls050344440/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
+        self.chase_link = 'http://www.imdb.com/search/title?count=100&keywords=chase&sort=moviemeter,asc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.political_link = 'http://www.imdb.com/search/title?count=100&keywords=political&sort=user_rating,desc&mode=detail&page=1&ref_=kw_ref_rt_vt'
+        self.private_link = 'http://www.imdb.com/search/title?count=100&keywords=private-eye&sort=moviemeter,asc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.true_link = 'http://www.imdb.com/search/title?count=100&keywords=based-on-true-story&sort=moviemeter,asc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.drugs_link = 'http://www.imdb.com/search/title?count=100&keywords=drugs&sort=moviemeter,asc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.racist_link = 'http://www.imdb.com/search/title?count=100&keywords=racism&sort=moviemeter,asc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.char_link = 'http://www.imdb.com/search/title?count=100&keywords=hearing-characters-thoughts'
+        self.Existential_link = 'http://www.imdb.com/search/title?count=100&keywords=existential&mode=detail&page=1&title_type=short,movie,tvMovie&sort=alpha,asc&ref_=kw_ref_typ'
+        self.romance_link = 'http://www.imdb.com/search/title?count=100&keywords=may-december-romance&sort=user_rating,desc&mode=detail&page=1&title_type=movie&ref_=kw_ref_typ'
+        self.dc_link = 'http://www.imdb.com/search/title?count=100&keywords=dc-comics&sort=alpha,asc&mode=detail&page=1&title_type=movie%2CtvMovie&ref_=kw_ref_typ=dc-comics%2Csuperhero&mode=detail&page=1&title_type=video%2Cmovie%2CtvMovie&ref_=kw_ref_typ&sort=alpha,asc'
+        self.marvel_link = 'http://www.imdb.com/search/title?count=100&keywords=marvel-comics&mode=detail&page=1&title_type=movie,tvMovie&sort=alpha,asc&ref_=kw_ref_typ'
+        self.disney_link = 'http://www.imdb.com/search/title?count=100&keywords=marvel-comics&mode=detail&mode=detail&page=1&page=1&title_type=movie,tvMovie&title_type=movie,tvMovie&sort=alpha,asc&ref_=kw_ref_typ%3Ddisney'
+
 
 		
 				###############################################################################################
@@ -193,6 +197,11 @@ class movies:
         self.wilhelm_link = 'http://www.imdb.com/search/title?count=100&keywords=wilhelm-scream&num_votes=2000,&title_type=feature&ref_=gnr_kw_ws,desc&count=40&start=1'
         self.dystopia_link = 'http://www.imdb.com/search/title?count=100&keywords=dystopia&num_votes=3000,&title_type=feature&ref_=gnr_kw_dy,desc&count=40&start=1'
         self.avant_link = 'http://www.imdb.com/search/title?count=100&keywords=avant-garde&num_votes=3000,&title_type=feature&ref_=gnr_kw_ag,desc&count=40&start=1'
+        self.newyear_link = 'http://www.imdb.com/search/title?count=100&keywords=new-year&num_votes=3000,&title_type=feature&ref_=gnr_kw_ag,desc&count=40&start=1'
+        self.easter_link = 'http://www.imdb.com/search/title?count=100&keywords=easter&num_votes=3000,&title_type=feature&ref_=gnr_kw_ag,desc&count=40&start=1'
+        self.halloween_link = 'http://www.imdb.com/search/title?count=100&keywords=halloween&num_votes=3000,&title_type=feature&ref_=gnr_kw_ag,desc&count=40&start=1'
+        self.thanx_link = 'http://www.imdb.com/search/title?count=100&keywords=thanksgiving&num_votes=3000,&title_type=feature&ref_=gnr_kw_ag,desc&count=40&start=1'
+        self.xmass_link = 'http://www.imdb.com/search/title?count=100&keywords=christmas&num_votes=3000,&title_type=feature&ref_=gnr_kw_ag,desc&count=40&start=1'
 #        self._link = 'http://www.imdb.com/search/title?,desc&count=40&start=1'
 #        self._link = 'http://www.imdb.com/search/title?,desc&count=40&start=1'
 #        self._link = 'http://www.imdb.com/search/title?,desc&count=40&start=1'
@@ -253,10 +262,10 @@ class movies:
         self.imdb54_link = 'http://www.imdb.com/list/ls051072059/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'		
 
 ################# Critters IMDB Lists ####################
-        self.bescritsfav_link = 'http://www.imdb.com/list/ls025926842/?start=1&view=detail&sort=listorian:asc&scb=0.3694954577617571'
-        self.besgreatest_link = 'http://www.imdb.com/list/ls055592025/?start=1&view=detail&sort=user_rating:desc&defaults=1&scb=0.775061602469568'
+        self.bescritsfav_link = 'http://www.imdb.com/list/ls025926842?view=detail&sort=alpha,asc&title_type=movie,tvMovie&start=1'
+        self.besgreatest_link = 'http://www.imdb.com/list/ls055592025?view=detail&sort=date_added,desc&title_type=movie,tvMovie&start=1'
         self.besaction_link = 'http://www.imdb.com/list/ls009668579/?start=1&view=detail&sort=user_rating:desc&defaults=1&scb=0.9494365460975143'
-        self.beswar_link = 'http://www.imdb.com/list/ls009678583/?start=1&view=detail&sort=listorian:asc&defaults=1&scb=0.47816919475737607'
+        self.beswar_link = 'http://www.imdb.com/list/ls009678583?view=detail&sort=alpha,asc&title_type=movie,tvMovie&start=1'
         self.besfantasy_link = 'http://www.imdb.com/list/ls009669258/?start=1&view=detail&sort=release_date_us:desc&defaults=1&scb=0.19679429634681167'
         self.beshistory_link = 'http://www.imdb.com/list/ls009668055/?start=1&view=detail&sort=release_date_us:desc&defaults=1&scb=0.9356958775568767' 
         self.besdrama_link = 'http://www.imdb.com/list/ls009668711/?start=1&view=detail&sort=release_date_us:desc&defaults=1&scb=0.5449555663113432'
@@ -282,8 +291,8 @@ class movies:
         self.traktfeatured_link = 'http://api.trakt.tv/recommendations/movies?limit=40'
         self.trakthistory_link = 'http://api.trakt.tv/users/me/history/movies?limit=40&page=1'
         self.imdblists_link = 'http://www.imdb.com/user/ur%s/lists?tab=all&sort=modified:desc&filter=titles' % self.imdb_user
-        self.imdblist_link = 'http://www.imdb.com/list/%s/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
-        self.imdblist2_link = 'http://www.imdb.com/list/%s/?view=detail&sort=created:desc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
+        self.imdblist_link = 'http://www.imdb.com/list/%s/?view=detail&sort=alpha,asc&title_type=movie,tvMovie&start=1'
+        self.imdblist2_link = 'http://www.imdb.com/list/%s/?view=detail&sort=date_added,desc&title_type=movie,tvMovie&start=1'
         self.imdbwatchlist_link = 'http://www.imdb.com/user/ur%s/watchlist?sort=alpha,asc' % self.imdb_user
         self.imdbwatchlist2_link = 'http://www.imdb.com/user/ur%s/watchlist?sort=date_added,desc' % self.imdb_user
 
@@ -776,13 +785,13 @@ class movies:
     def imdb_person_list(self, url):
         try:
             result = client.request(url)
-            items = client.parseDOM(result, 'tr', attrs = {'class': '.+? detailed'})
+            items = client.parseDOM(result, 'div', attrs = {'class': '.+? detailed'})
         except:
             return
 
         for item in items:
             try:
-                name = client.parseDOM(item, 'a', ret='title')[0]
+                name = client.parseDOM(item, 'img', ret='alt')[0]
                 name = client.replaceHTMLCodes(name)
                 name = name.encode('utf-8')
 
@@ -808,7 +817,7 @@ class movies:
     def imdb_user_list(self, url):
         try:
             result = client.request(url)
-            items = client.parseDOM(result, 'div', attrs = {'class': 'list_name'})
+            items = client.parseDOM(result, 'li', attrs = {'class': 'ipl-zebra-list__item user-list'})
         except:
             pass
 
@@ -819,7 +828,7 @@ class movies:
                 name = name.encode('utf-8')
 
                 url = client.parseDOM(item, 'a', ret='href')[0]
-                url = url.split('/list/', 1)[-1].replace('/', '')
+                url = url.split('/list/', 1)[-1].strip('/')
                 url = self.imdblist_link % url
                 url = client.replaceHTMLCodes(url)
                 url = url.encode('utf-8')
