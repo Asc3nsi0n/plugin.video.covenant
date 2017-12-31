@@ -30,6 +30,7 @@ from resources.lib.modules import playcount
 from resources.lib.modules import workers
 from resources.lib.modules import views
 from resources.lib.modules import utils
+from resources.lib.indexers import navigator
 
 import os,sys,re,json,urllib,urlparse,datetime
 
