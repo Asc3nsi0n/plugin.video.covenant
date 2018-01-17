@@ -29,7 +29,7 @@ import scraper
 logger = log_utils.Logger.get_logger(__name__)
 
 QUALITY_MAP = {'HD': QUALITIES.HD720, 'HDTV': QUALITIES.HIGH, 'DVD': QUALITIES.HIGH, '3D': QUALITIES.HIGH, 'CAM': QUALITIES.LOW}
-BASE_URL = 'http://www.iwatchonline.to'
+BASE_URL = 'https://www.watchonline.to'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL

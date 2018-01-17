@@ -1,6 +1,6 @@
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -65,7 +65,7 @@ class Scraper(scraper.Scraper):
         
         pattern = 'href="([^"]+)[^>]*>\s*<[^>]+play_video.gif'
         for match in re.finditer(pattern, html, re.I):
-            stream_url = match.group(1)
+            stream_url = source + scraper_utils.append_headers({'User-Agent': scraper_utils.get_ua()})
             host = urlparse.urlparse(stream_url).hostname
             quality = scraper_utils.get_quality(video, host, quality)
             hoster = {'multi-part': False, 'url': stream_url, 'host': host, 'class': self, 'quality': quality, 'rating': None, 'views': None, 'direct': False}

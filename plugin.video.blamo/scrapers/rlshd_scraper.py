@@ -20,6 +20,7 @@ import urlparse
 import kodi
 import log_utils  # @UnusedImport
 import dom_parser2
+from salts_lib import debrid
 from salts_lib import scraper_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import VIDEO_TYPES
@@ -86,5 +87,5 @@ class Scraper(scraper.Scraper):
     def search(self, video_type, title, year, season=''):  # @UnusedVariable
         html = self._http_get(self.base_url, params={'s': title}, require_debrid=True, cache_limit=1)
         post_pattern = 'class="entry-title">\s*<a[^>]+href="(?P<url>[^"]*/(?P<date>\d{4}/\d{1,2}/\d{1,2})/[^"]*)[^>]+>(?P<post_title>[^<]+)'
-        date_format = '%Y/%m/%d'
+        date_format = '%D/%m/%y'
         return self._blog_proc_results(html, post_pattern, date_format, video_type, title, year)

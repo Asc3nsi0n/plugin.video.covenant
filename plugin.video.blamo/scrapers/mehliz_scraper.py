@@ -25,7 +25,7 @@ from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import QUALITIES
 
 logger = log_utils.Logger.get_logger(__name__)
-BASE_URL = 'https://www.mehlizmovies.com'
+BASE_URL = 'https://www.mehlizmovies.is'
 Q_MAP = {'HD': QUALITIES.HD720, 'DVD': QUALITIES.HIGH, 'CAM': QUALITIES.LOW}
 
 class Scraper(scraper.Scraper):

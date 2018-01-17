@@ -1,6 +1,6 @@
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,10 +22,9 @@ import urlparse
 import kodi
 import log_utils  # @UnusedImport
 import dom_parser2
+import client
 from salts_lib import scraper_utils
-from salts_lib import client
 from salts_lib import debrid
-from salts_lib import source_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import VIDEO_TYPES
 from salts_lib.constants import XHR

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ import scraper
 logger = log_utils.Logger.get_logger(__name__)
 
 BASE_URL = 'http://www.dizist1.com'
-ALLOWED = [u'odnok', u'rodi', u'odnokaltyazısız', u'openload']
+ALLOWED = [u'odnok', u'rodi', u'odnokaltyazısız', u'openload', 'ok.ru']
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL
@@ -159,7 +159,7 @@ class Scraper(scraper.Scraper):
 
     def search(self, video_type, title, year, season=''):  # @UnusedVariable
         results = []
-        url = scraper_utils.urljoin(self.base_url, '/arsiv')
+        url = scraper_utils.urljoin(self.base_url, '/arsiv/')
         html = self._http_get(url, cache_limit=48)
         norm_title = scraper_utils.normalize_title(title)
         fragment = dom_parser2.parse_dom(html, 'div', {'class': 'ts-list-content'})

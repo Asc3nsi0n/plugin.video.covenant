@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,12 +20,11 @@ import re
 import kodi
 import log_utils  # @UnusedImport
 from salts_lib import scraper_utils
-from salts_lib import source_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import VIDEO_TYPES
 import scraper
 
-BASE_URL = 'http://dl.melimedia.net/mersad/movie/96/07/'
+BASE_URL = 'http://dl20.mihanpix.com/94/96/9/'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL

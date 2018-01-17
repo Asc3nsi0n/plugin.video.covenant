@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ class Scraper(scraper.Scraper):
 
     @classmethod
     def get_name(cls):
-        return 'DLMAC'
+        return 'DL Mac'
 
     def get_sources(self, video):
         hosters = []

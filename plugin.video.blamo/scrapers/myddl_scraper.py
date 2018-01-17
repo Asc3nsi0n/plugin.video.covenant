@@ -22,17 +22,16 @@ import urlparse
 import kodi
 import log_utils  # @UnusedImport
 import dom_parser2
+from salts_lib import debrid
 from salts_lib.utils2 import i18n
 from salts_lib import scraper_utils
-from salts_lib import client
-from salts_lib import debrid
-from salts_lib import source_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import MONTHS
 from salts_lib.constants import VIDEO_TYPES
 import scraper
 
-BASE_URL = 'http://xtremeli.pw'
+BASE_URL = 'http://xtremeli.me'
+SEARCH_URL = '/search/%s/feed/rss2/'
 EXCLUDE_LINKS = ['adf.ly', urlparse.urlparse(BASE_URL).hostname]
 
 class Scraper(scraper.Scraper):
@@ -117,7 +116,7 @@ class Scraper(scraper.Scraper):
     def search(self, video_type, title, year, season=''):  # @UnusedVariable
         results = []
         if video_type == VIDEO_TYPES.TVSHOW and title:
-            test_url = '/tv-show/%s/' % (scraper_utils.to_slug(title))
+            test_url = '/tvshow/' % (scraper_utils.to_slug(title))
             test_url = scraper_utils.urljoin(self.base_url, test_url)
             html = self._http_get(test_url, require_debrid=True, cache_limit=24)
             posts = dom_parser2.parse_dom(html, 'div', {'id': re.compile('post-\d+')})

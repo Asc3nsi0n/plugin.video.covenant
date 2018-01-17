@@ -24,7 +24,7 @@ from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import VIDEO_TYPES
 import scraper
 
-BASE_URL = 'http://dl.melimedia.net/mersad/movie/96/04/'
+BASE_URL = 'http://79.127.126.110/Movie/5/'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL
@@ -39,7 +39,7 @@ class Scraper(scraper.Scraper):
 
     @classmethod
     def get_name(cls):
-        return 'MerSad'
+        return 'ExtraDL'
 
     def get_sources(self, video):
         hosters = []

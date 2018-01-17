@@ -15,7 +15,6 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-import scraper
 import datetime
 import re
 import urllib
@@ -23,17 +22,17 @@ import urlparse
 import log_utils  # @UnusedImport
 import kodi
 import dom_parser2
-import client
-from salts_lib import scraper_utils
 from salts_lib import debrid
+from salts_lib import scraper_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import SHORT_MONS
 from salts_lib.constants import VIDEO_TYPES
 from salts_lib.utils2 import i18n
+import scraper
 
-BASE_URL = 'http://www.ddlvalley.me'
+BASE_URL = 'http://www.ddlvalley.cool'
 CATEGORIES = {VIDEO_TYPES.MOVIE: '/category/movies/', VIDEO_TYPES.TVSHOW: '/category/tv-shows/'}
-LOCAL_UA = 'Death Streams for Kodi/%s' % (kodi.get_version())
+LOCAL_UA = 'SALTS for Kodi/%s' % (kodi.get_version())
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL
@@ -110,7 +109,7 @@ class Scraper(scraper.Scraper):
         if video_type == VIDEO_TYPES.TVSHOW and title:
             test_url = '/show/%s/' % (scraper_utils.to_slug(title))
             test_url = scraper_utils.urljoin(self.base_url, test_url)
-            html = self._http_get(test_url, require_debrid=False, cache_limit=24)
+            html = self._http_get(test_url, require_debrid=True, cache_limit=24)
             posts = dom_parser2.parse_dom(html, 'div', {'id': re.compile('post-\d+')})
             if posts and CATEGORIES[video_type] in posts[0].content:
                 match = re.search('<div[^>]*>\s*show\s+name:.*?<a\s+href="([^"]+)[^>]+>(?!Season\s+\d+)([^<]+)', posts[0].content, re.I)

@@ -20,7 +20,7 @@ import re
 import time
 import random
 import hashlib
-import scraper
+import urllib
 import urlparse
 import kodi
 import log_utils  # @UnusedImport
@@ -31,6 +31,7 @@ from salts_lib.constants import VIDEO_TYPES
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import XHR
 from salts_lib.constants import QUALITIES
+import scraper
 
 logger = log_utils.Logger.get_logger()
 BASE_URL = 'https://iomovies.net'
@@ -200,7 +201,7 @@ class Scraper(scraper.Scraper):
     
     def search(self, video_type, title, year, season=''):  # @UnusedVariable
         results = []
-        search_url = scraper_utils.urljoin(self.base_url, '/search')
+        search_url = scraper_utils.urljoin(self.base_url, '/search/')
         html = self._http_get(search_url, params={'q': title}, cache_limit=8)
         for _attrs, item in dom_parser2.parse_dom(html, 'div', {'class': 'movie-item'}):
             match = dom_parser2.parse_dom(item, 'a', {'itemprop': 'url'}, req='href')

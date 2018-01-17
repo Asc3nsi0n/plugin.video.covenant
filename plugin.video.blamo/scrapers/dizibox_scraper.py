@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ import scraper
 
 logger = log_utils.Logger.get_logger()
 BASE_URL = 'http://www.dizibox1.com'
-LINKS = ['king.php', 'zeus.php', 'hades.php', 'juliet.php']
+LINKS = ['king.php', 'zeus.php', 'hades.php', 'juliet.php', 'ares.php', 'dbx.php', 'romeo.php', 'rapid.php', 'mailru.php', 'molly.php', 'open.php']
 QUALITY_MAP = {'HD': QUALITIES.HD720}
 
 class Scraper(scraper.Scraper):

@@ -1,5 +1,5 @@
 """
-    Death Streams XBMC Addon
+    Death Streams Addon
     Copyright (C) 2014 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ from salts_lib.constants import VIDEO_TYPES
 import scraper
 
 
-BASE_URL = 'http://losmovies.ac'
+BASE_URL = 'http://los-movies.com'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL

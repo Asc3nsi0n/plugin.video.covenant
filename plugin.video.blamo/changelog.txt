@@ -1,3 +1,18 @@
+[B]Version 2.4.3[/B]
+- Fixed SeriesWatch, Mersad, Dlmac Mihanshow and a few other (free ones)
+- Fixed DDLvalley (not showing on some devices)
+- Fixed Scenerls (updated and repaired)
+- Fixed Allrls
+- Fixed Seriesonline and Iwatch
+- Fixed Mehlis
+- Fixed Watch series online
+- Watch free (Fixed in previous update)
+- Renamed a few Index Scrapers
+- Cleared up few bugs
+- Removed some imports
+- Removed a few Files
+- Removed quite a few imports
+
 [B]Version 2.4.2[/B]
 - Scraper fixes
 - Added Fixes to settings and changed few things around

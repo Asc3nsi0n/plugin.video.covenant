@@ -30,7 +30,8 @@ import json
 import kodi
 import log_utils
 import utils
-import cloudflare
+import httplib
+import cookielib
 from url_dispatcher import URL_Dispatcher
 from salts_lib.db_utils import DB_Connection, DatabaseRecoveryError
 from salts_lib.srt_scraper import SRT_Scraper

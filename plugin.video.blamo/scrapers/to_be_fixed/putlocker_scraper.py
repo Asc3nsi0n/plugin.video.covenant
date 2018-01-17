@@ -16,21 +16,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 import re
-import urllib
 import urlparse
 import kodi
 import log_utils  # @UnusedImport
 import dom_parser2
-from salts_lib import debrid
 from salts_lib import scraper_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import VIDEO_TYPES
 from salts_lib.utils2 import i18n
 import scraper
 
-BASE_URL = 'http://scene-rls.net'
-MULTI_HOST = 'rlsbb.ru'
-CATEGORIES = {VIDEO_TYPES.MOVIE: '/category/movies/"', VIDEO_TYPES.EPISODE: '/category/tvshows/"'}
+BASE_URL = 'https://www.rlshd.net'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL
@@ -41,11 +37,11 @@ class Scraper(scraper.Scraper):
 
     @classmethod
     def provides(cls):
-        return frozenset([VIDEO_TYPES.MOVIE, VIDEO_TYPES.EPISODE])
+        return frozenset([VIDEO_TYPES.EPISODE])
 
     @classmethod
     def get_name(cls):
-        return 'scene-rls'
+        return 'RLSPLUS'
 
     def get_sources(self, video):
         source_url = self.get_url(video)
@@ -53,33 +49,26 @@ class Scraper(scraper.Scraper):
         if not source_url or source_url == FORCE_NO_MATCH: return hosters
         url = scraper_utils.urljoin(self.base_url, source_url)
         html = self._http_get(url, require_debrid=True, cache_limit=.5)
-        sources = self.__get_post_links(html)
-        for source, value in sources.iteritems():
+        sources = self.__get_post_links(html, video)
+        for source in sources:
             if scraper_utils.excluded_link(source): continue
             host = urlparse.urlparse(source).hostname
-            if video.video_type == VIDEO_TYPES.MOVIE:
-                meta = scraper_utils.parse_movie_link(value['release'])
-            else:
-                meta = scraper_utils.parse_episode_link(value['release'])
-            quality = scraper_utils.height_get_quality(meta['height'])
-            hoster = {'multi-part': False, 'host': host, 'class': self, 'views': None, 'url': source, 'rating': None, 'quality': quality, 'direct': False}
-            if 'format' in meta: hoster['format'] = meta['format']
+            hoster = {'multi-part': False, 'host': host, 'class': self, 'views': None, 'url': source, 'rating': None, 'quality': sources[source], 'direct': False}
             hosters.append(hoster)
         return hosters
 
-    def __get_post_links(self, html):
+    def __get_post_links(self, html, video):
         sources = {}
-        post = dom_parser2.parse_dom(html, 'div', {'class': 'postContent'})
+        post = dom_parser2.parse_dom(html, 'article', {'id': re.compile('post-\d+')})
         if post:
-            post = post[0].content
-            for result in re.finditer('<p\s+style="text-align:\s*center;">(.*?)<br.*?<h2(.*?)(?:<h4|<h3|</div>|$)', post, re.DOTALL):
-                release, links = result.groups()
-                release = re.sub('</?[^>]*>', '', release)
-                release = release.upper()
-                for match in re.finditer('href="([^"]+)', links):
-                    stream_url = match.group(1)
-                    if MULTI_HOST in stream_url: continue
-                    sources[stream_url] = {'release': release}
+            for _attrs, fragment in dom_parser2.parse_dom(post[0].content, 'h2'):
+                for attrs, _content in dom_parser2.parse_dom(fragment, 'a', req='href'):
+                    stream_url = attrs['href']
+                    meta = scraper_utils.parse_episode_link(stream_url)
+                    release_quality = scraper_utils.height_get_quality(meta['height'])
+                    host = urlparse.urlparse(stream_url).hostname
+                    quality = scraper_utils.get_quality(video, host, release_quality)
+                    sources[stream_url] = quality
         return sources
         
     def get_url(self, video):
@@ -95,16 +84,7 @@ class Scraper(scraper.Scraper):
         return settings
 
     def search(self, video_type, title, year, season=''):  # @UnusedVariable
-        search_url = scraper_utils.urljoin(self.base_url, '/search/%s/')
-        search_url = search_url % (urllib.quote_plus(title))
-        headers = {'Referer': self.base_url}
-        all_html = self._http_get(search_url, headers=headers, require_debrid=True, cache_limit=1)
-        
-        html = ''
-        for _attrs, post in dom_parser2.parse_dom(all_html, 'div', {'class': 'post'}):
-            if CATEGORIES[video_type] in post:
-                html += post
-                
-        post_pattern = 'class="postTitle">.*?href="(?P<url>[^"]+)[^>]*>(?P<post_title>.*?)</a>'
-        date_format = ''
+        html = self._http_get(self.base_url, params={'s': title}, require_debrid=True, cache_limit=1)
+        post_pattern = 'class="entry-title">\s*<a[^>]+href="(?P<url>[^"]*/(?P<date>\d{4}/\d{1,2}/\d{1,2})/[^"]*)[^>]+>(?P<post_title>[^<]+)'
+        date_format = '%d/%m/%Y'
         return self._blog_proc_results(html, post_pattern, date_format, video_type, title, year)

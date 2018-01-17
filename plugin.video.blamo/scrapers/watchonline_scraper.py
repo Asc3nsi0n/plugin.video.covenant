@@ -1,6 +1,6 @@
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -102,7 +102,7 @@ class Scraper(scraper.Scraper):
                 
     def search(self, video_type, title, year, season=''):  # @UnusedVariable
         results = []
-        search_url = scraper_utils.urljoin(self.base_url, '/advanced-search/')
+        search_url = scraper_utils.urljoin(self.base_url, '/search/')
         headers = {'Referer': self.base_url}
         params = {'search_query': title, 'orderby': '', 'order': '', 'wpas': 1}
         html = self._http_get(search_url, params=params, headers=headers, cache_limit=8)

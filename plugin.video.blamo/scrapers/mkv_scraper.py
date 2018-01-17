@@ -26,7 +26,7 @@ from salts_lib.constants import VIDEO_TYPES
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import QUALITIES
 
-BASE_URL = 'http://dl.dlfile.pro/1'
+BASE_URL = 'http://dl.melimedia.net/mersad/movie/96/09/'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL

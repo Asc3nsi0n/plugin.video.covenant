@@ -1,6 +1,6 @@
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,8 @@
 """
 import re
 import kodi
+import urllib
+import urlparse
 import dom_parser2
 import log_utils  # @UnusedImport
 from salts_lib import scraper_utils
@@ -38,7 +40,7 @@ except ImportError:
 
 logger = log_utils.Logger.get_logger()
 BASE_URL = 'http://dizipas.net'
-AJAX_URL = 'http://dizipas.com/player/ajax.php'
+AJAX_URL = 'http://dizipas.net/player/ajax.php'
 XHR = {'X-Requested-With': 'XMLHttpRequest'}
 
 

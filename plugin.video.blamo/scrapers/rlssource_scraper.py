@@ -1,6 +1,6 @@
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,16 +21,15 @@ import urlparse
 import json
 import kodi
 import dom_parser2
+import client
 import log_utils  # @UnusedImport
 from salts_lib import scraper_utils
-from salts_lib import client
 from salts_lib import debrid
-from salts_lib import source_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import VIDEO_TYPES
 import scraper
 
-BASE_URL = 'http://allrls.me'
+BASE_URL = 'http://allrls.pw'
 SEARCH_URL = '?s=%s+%s&go=Search'
 
 class Scraper(scraper.Scraper):

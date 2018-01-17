@@ -15,14 +15,15 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+import re
 import urllib
 import urlparse
+import json
+import client
 
 import kodi
 import log_utils  # @UnusedImport
 from salts_lib import scraper_utils
-from salts_lib import client
-from salts_lib import source_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import QUALITIES
 from salts_lib.constants import Q_ORDER

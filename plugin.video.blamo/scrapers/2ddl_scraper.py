@@ -22,10 +22,9 @@ import urlparse
 import kodi
 import log_utils  # @UnusedImport
 import dom_parser2
+import client
 from salts_lib.utils2 import i18n
-from salts_lib import source_utils
 from salts_lib import scraper_utils
-from salts_lib import client
 from salts_lib import debrid
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import SHORT_MONS

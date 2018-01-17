@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """
     Death Streams Addon
     Copyright (C) 2017 Mr.Blamo

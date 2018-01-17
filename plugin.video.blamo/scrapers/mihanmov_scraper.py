@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import VIDEO_TYPES
 import scraper
 
-BASE_URL = 'http://dl.melimedia.net/mersad/movie/96/06/'
+BASE_URL = 'http://dl20.mihanpix.com/94/96/10/'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL
@@ -39,7 +39,7 @@ class Scraper(scraper.Scraper):
 
     @classmethod
     def get_name(cls):
-        return 'MihanMov'
+        return 'NightPix'
 
     def get_sources(self, video):
         hosters = []

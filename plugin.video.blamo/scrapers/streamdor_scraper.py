@@ -1,6 +1,6 @@
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import QUALITIES
 from salts_lib.constants import XHR
 
-BASE_URL = 'https://api.streamdor.com'
+BASE_URL = 'https://www.streamdor.com'
 Q_MAP = {'hd': QUALITIES.HD720, 'sd': QUALITIES.HIGH}
 
 class Scraper(scraper.Scraper):

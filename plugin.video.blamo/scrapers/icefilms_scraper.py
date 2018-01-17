@@ -1,5 +1,5 @@
 """
-    Death Streams XBMC Addon
+    Death Streams Addon
     Copyright (C) 2014 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify

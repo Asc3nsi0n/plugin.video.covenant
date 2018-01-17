@@ -1,6 +1,6 @@
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,9 +18,10 @@
 import re
 import urllib
 import urlparse
-
 import kodi
+import dom_parser2
 import log_utils  # @UnusedImport
+from salts_lib import debrid
 from salts_lib import scraper_utils
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import QUALITIES
@@ -31,7 +32,7 @@ import scraper
 logger = log_utils.Logger.get_logger()
 BASE_URL = 'https://directdownload.tv'
 SEARCH_URL = '/api?key=%s&%s&keyword=%s'
-API_KEY = '4B0BB862F24C8A29'
+API_KEY = 'AFBF8E33A19787D1'
 
 DD_QUALITIES = ['PDTV', 'DSR', 'DVDRIP', 'HDTV', '720P', 'WEBDL', 'WEBDL1080P', '1080P-X265']
 Q_DICT = dict((quality, i) for i, quality in enumerate(DD_QUALITIES))
