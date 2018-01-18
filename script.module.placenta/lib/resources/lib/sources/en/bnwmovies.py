@@ -16,9 +16,6 @@ import re,urllib,urlparse,base64
 import requests
 
 from resources.lib.modules import client
-from resources.lib.modules import log_utils
-
-session = requests.Session()
 
 class source:
     def __init__(self):
@@ -32,17 +29,8 @@ class source:
         try:
             url = {'title': title, 'year': year, 'imdb': imdb}
             return urllib.urlencode(url)
-
         except Exception:
             return
-
-    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
-        try:
-
-                    return url
-        except:
-            return
-        return
 
     def sources(self, url, hostDict, hostprDict):
         try:
@@ -56,7 +44,7 @@ class source:
 
             start_url=self.base_link+self.search_link+title.replace(' ','+')
             html = client.request(start_url)
-            match = re.compile('<div class="post">.+?<h3>.+?href="(.+?)".+?rel="bookmark">(.+?)</a>',re.DOTALL).findall(html)
+            match = re.compile('<div class="post">.+?href="(.+?)".+?rel="bookmark">(.+?)</a>',re.DOTALL).findall(html)
             for url,alt in match:
                 if title.lower() == alt.lower():
                     html2 = client.request(url)

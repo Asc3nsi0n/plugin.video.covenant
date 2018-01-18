@@ -25,7 +25,7 @@ class source:
         self.language = ['en']
         self.domains = ['iiddl.net']
         self.base_link = 'http://iiddl.net'
-        self.search_link = '/search/%s/feed/rss2/'
+        self.search_link = '/search/%s'
 
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -62,7 +62,6 @@ class source:
     def sources(self, url, hostDict, hostprDict):
         try:
             sources = []
-
             if url == None: return sources
 
             if debrid.status() is False: raise Exception()
@@ -80,80 +79,31 @@ class source:
             url = self.search_link % urllib.quote_plus(query)
             url = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(url)
-
-            posts = client.parseDOM(r, 'item')
+            html = client.request(url)
+            url_list = re.compile('<h2><a href="([^"]+)"',re.DOTALL).findall(html)
 
             hostDict = hostprDict + hostDict
 
-            items = []
-
-            for post in posts:
-                try:
-                    t = client.parseDOM(post, 'title')[0]
-
-                    c = client.parseDOM(post, 'content.+?')[0]
-
-                    u = re.findall('<singlelink>(.+?)(?:<download>|$)', c.replace('\n', ''))[0]
-                    u = client.parseDOM(u, 'a', ret='href')
-
-                    s = re.findall('((?:\d+\.\d+|\d+\,\d+|\d+)\s*(?:GB|GiB|MB|MiB))', c)
-                    s = s[0] if s else '0'
-
-                    items += [(t, i, s) for i in u]
-
-                except:
-                    pass
-
-            for item in items:
-                try:
-                    name = item[0]
-                    name = client.replaceHTMLCodes(name)
-
-                    t = re.sub('(\.|\(|\[|\s)(\d{4}|S\d*E\d*|S\d*|3D)(\.|\)|\]|\s|)(.+|)', '', name)
-
-                    if not cleantitle.get(t) == cleantitle.get(title): raise Exception()
-
-                    y = re.findall('[\.|\(|\[|\s](\d{4}|S\d*E\d*|S\d*)[\.|\)|\]|\s]', name)[-1].upper()
-
-                    if not y == hdlr: raise Exception()
-
-                    quality, info = source_utils.get_release_quality(name, item[1])
-
-                    try:
-                        size = re.findall('((?:\d+\.\d+|\d+\,\d+|\d+)\s*(?:GB|GiB|MB|MiB))', item[2])[-1]
-                        div = 1 if size.endswith(('GB', 'GiB')) else 1024
-                        size = float(re.sub('[^0-9|/.|/,]', '', size))/div
-                        size = '%.2f GB' % size
-                        info.append(size)
-                    except:
-                        pass
-
-                    info = ' | '.join(info)
-
-                    url = item[1]
-                    if any(x in url for x in ['.rar', '.zip', '.iso']): raise Exception()
-                    url = client.replaceHTMLCodes(url)
-                    url = url.encode('utf-8')
-
-                    valid, host = source_utils.is_host_valid(url, hostDict)
-                    if not valid: raise Exception()
-                    host = client.replaceHTMLCodes(host)
-                    host = host.encode('utf-8')
-
-                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': True})
-                except:
-                    pass
-
-            check = [i for i in sources if not i['quality'] == 'CAM']
-            if check: sources = check
-
+            for url in url_list:
+                if cleantitle.get(title) in cleantitle.get(url):
+                    html = client.request(url)
+                    links = re.compile('href="([^"]+)" rel="nofollow"',re.DOTALL).findall(html)
+                    for vid_url in links:
+                        if 'ouo.io' in vid_url:
+                            continue
+                        if 'sh.st' in vid_url:
+                            continue
+                        if 'linx.2ddl.ooo' in vid_url:
+                            continue
+                        if '.rar' not in vid_url:
+                            if '.srt' not in vid_url:
+                                quality,info = source_utils.get_release_quality(url, vid_url)
+                                host = vid_url.split('//')[1].replace('www.','')
+                                host = host.split('/')[0].lower()
+                                sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': vid_url, 'info': info, 'direct': False, 'debridonly': False})
             return sources
-        except:
-            return sources
-
+        except Exception, argument:
+            return sources  
 
     def resolve(self, url):
         return url
-
-

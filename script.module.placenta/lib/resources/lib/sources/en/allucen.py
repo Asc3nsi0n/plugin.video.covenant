@@ -12,7 +12,6 @@
 # Addon id: plugin.video.placenta
 # Addon Provider: MuadDib
 
-
 import re,urllib,urlparse,json
 from resources.lib.modules import client
 from resources.lib.modules import control

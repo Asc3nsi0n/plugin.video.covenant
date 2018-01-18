@@ -18,7 +18,6 @@ from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import debrid
 
-
 class source:
     def __init__(self):
         self.priority = 0

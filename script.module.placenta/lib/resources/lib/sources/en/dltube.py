@@ -12,12 +12,12 @@
 # Addon id: plugin.video.placenta
 # Addon Provider: MuadDib
 
-import re,urllib,urlparse,json
+import re,base64,urllib,urlparse,json
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import debrid
-
+#from resources.lib.modules import log_utils
 
 class source:
     def __init__(self):
@@ -26,7 +26,6 @@ class source:
         self.domains = ['mydownloadtube.com','mydownloadtube.to']
         self.base_link = 'https://www.mydownloadtube.to/'
         self.search_link = '%ssearch/%s'
-        self.search_link = self.search_link.replace('+','-')
         self.download_link = '/movies/play_online'
 
 
@@ -34,24 +33,17 @@ class source:
         try:
             if debrid.status() == False: raise Exception()
 
-            t = cleantitle.get(title)
+            query = self.search_link % (self.base_link, urllib.quote_plus(title).replace('+', '-'))
+            html = client.request(query, XHR=True)
 
-            query = self.search_link + urllib.quote_plus(title)
-            query = urlparse.urljoin(self.base_link, query)
+            results = re.compile('<ul id=first-carousel1(.+?)</ul>',re.DOTALL).findall(html)
+            result = re.compile('alt="(.+?)".+?<h2><a href="(.+?)".+?</h2>.+?>(.+?)</p>',re.DOTALL).findall(str(results))
 
-            r = client.request(query, XHR=True)
-            r = json.loads(r)
-
-            r = [i for i in r if 'category' in i and 'movie' in i['category'].lower()]
-            r = [(i['url'], i['label']) for i in r if 'label' in i and 'url' in i]
-            r = [(i[0], re.findall('(.+?) \((\d{4})', i[1])) for i in r]
-            r = [(i[0], i[1][0][0], i[1][0][1]) for i in r if len(i[1]) > 0]
-            r = [i[0] for i in r if t == cleantitle.get(i[1]) and year == i[2]][0]
-
-            url = re.findall('(?://.+?|)(/.+)', r)[0]
-            url = client.replaceHTMLCodes(url)
-            url = url.encode('utf-8')
-            return url
+            for found_title,url,date in result:
+                new_url = self.base_link + url
+                if cleantitle.get(title) in cleantitle.get(found_title):
+                    if year in date:
+                        return new_url
         except:
             return
 
@@ -59,58 +51,35 @@ class source:
     def sources(self, url, hostDict, hostprDict):
         try:
             sources = []
-
             if url == None: return sources
-
             if debrid.status() == False: raise Exception()
 
-            url = urlparse.urljoin(self.base_link, url)
-
             r = client.request(url)
+            mov_id = re.compile('id=movie value=(.+?)/>',re.DOTALL).findall(r)[0]
+            mov_id = mov_id.rstrip()
+            headers = {'Origin':'https://mydownloadtube.to', 'Referer':url,
+                       'X-Requested-With':'XMLHttpRequest', 'User_Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'}
+            request_url = 'https://mydownloadtube.to/movies/play_online' 
+            form_data = {'movie':mov_id}
+            links_page = client.request(request_url, headers=headers, post=form_data)
+            matches = re.compile("sources:(.+?)controlbar",re.DOTALL).findall(links_page)
+            match = re.compile("file:window.atob.+?'(.+?)'.+?label:\"(.+?)\"",re.DOTALL).findall(str(matches))
+            for link,res in match:
+                vid_url = base64.b64decode(link).replace(' ','%20')
+                res = res.replace('3Dp','3D').replace(' HD','')
+                sources.append({'source': 'DirectLink', 'quality': res, 'language': 'en', 'url': vid_url, 'info': '', 'direct': True, 'debridonly': False})
 
-            r = client.parseDOM(r, 'input', {'id': 'movie_id'}, ret='value')
-            if r:
-                r = client.request(urlparse.urljoin(self.base_link, self.download_link), post='movie=%s' % r, referer=url)
-
-            links = client.parseDOM(r, 'p')
-
-            hostDict = hostprDict + hostDict
-
-            locDict = [(i.rsplit('.', 1)[0], i) for i in hostDict]
-
-
-            for link in links:
-                try:
-                    host = re.findall('Downloads-Server(.+?)(?:\'|\")\)', link)[0]
-                    host = host.strip().lower().split()[-1]
-                    if host == 'fichier': host = '1fichier'
-                    host = [x[1] for x in locDict if host == x[0]][0]
-                    if not host in hostDict: raise Exception()
-                    host = client.replaceHTMLCodes(host)
-                    host = host.encode('utf-8')
-
-                    url = client.parseDOM(link, 'a', ret='href')[0]
-                    url = client.replaceHTMLCodes(url)
-                    url = url.encode('utf-8')
-
-                    r = client.parseDOM(link, 'a')[0]
-
-                    fmt = r.strip().lower().split()
-
-                    if '1080p' in fmt: quality = '1080p'
-                    elif '720p' in fmt: quality = 'HD'
-
-                    try:
-                        size = re.findall('((?:\d+\.\d+|\d+\,\d+|\d+) [M|G]B)', r)[-1]
-                        div = 1 if size.endswith(' GB') else 1024
-                        size = float(re.sub('[^0-9|/.|/,]', '', size))/div
-                        info = '%.2f GB' % size
-                    except:
-                        info = ''
-
-                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': True})
-                except:
-                    pass
+            match2 = re.compile('<[iI][fF][rR][aA][mM][eE].+?[sS][rR][cC]="(.+?)"',re.DOTALL).findall(links_page)
+            for link in match2:
+                host = link.split('//')[1].replace('www.','')
+                host = host.split('/')[0].split('.')[0].title()
+                if '1080' in link:
+                    res='1080p'
+                elif '720' in link:
+                    res='720p'
+                else:res = 'SD'
+                if 'flashx' not in link:
+                    sources.append({'source': host, 'quality': res, 'language': 'en', 'url': link, 'info': 'AC3', 'direct': False, 'debridonly': False})
 
             return sources
         except:

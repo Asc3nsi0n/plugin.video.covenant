@@ -21,10 +21,6 @@ from resources.lib.modules import client, cleantitle, directstream, dom_parser2
 
 class source:
     def __init__(self):
-        '''
-        Constructor defines instances variables
-
-        '''
         self.priority = 1
         self.language = ['en']
         self.domains = ['123hulu.com','123hulu.unblockall.org']

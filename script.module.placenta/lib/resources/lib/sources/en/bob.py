@@ -16,6 +16,7 @@ import re,urllib,urlparse,base64
 import requests
 
 from resources.lib.modules import client
+from resources.lib.modules import cleantitle
 
 class source:
     def __init__(self):
@@ -68,12 +69,12 @@ class source:
             html = client.request(url,headers=headers)
             
             chktitle = re.compile('property="og:title" content="(.+?)" ',re.DOTALL).findall(html)[0]
-            if title.lower() == chktitle.lower():
+            if cleantitle.get(title) == cleantitle.get(chktitle):
                 vidpage = re.compile('id="tab-movie".+?data-file="(.+?)"',re.DOTALL).findall(html)
             
                 for link in vidpage:
                     if 'trailer' not in link.lower():
-                        link = self.base_link + link
+                        link = urlparse.urljoin(self.base_link, link)
                         sources.append({'source':'DirectLink','quality':'SD','language': 'en','url':link,'info':[],'direct':True,'debridonly':False})
             return sources   
         except:

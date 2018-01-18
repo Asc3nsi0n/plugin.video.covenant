@@ -181,7 +181,7 @@ class source:
                     quality = client.parseDOM(i, 'span', ret='class')[0]
                     quality,info = source_utils.get_release_quality(quality, url)
 
-                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
+                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': False})
                 except:
                     pass
 

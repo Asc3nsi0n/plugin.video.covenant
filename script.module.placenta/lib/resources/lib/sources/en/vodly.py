@@ -18,7 +18,7 @@ from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import cache
 from resources.lib.modules import dom_parser2
-
+from resources.lib.modules import source_utils
 
 class source:
     def __init__(self):
@@ -26,74 +26,62 @@ class source:
         self.language = ['en']
         self.domains = ['vodly.us', 'vodly.unblocked.tv']
         self.base_link = 'http://vodly.us'
-        self.search_link = '/search?s=%s'
-
+        #self.search_link = '/search?s=%s'
+        self.search_link = '%s/search?q=vodly.us+%s+%s'
+        self.goog = 'https://www.google.co.uk'
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            items = []
-            clean_title = cleantitle.geturl(title) +'-'+ year
-            search_url = urlparse.urljoin(self.base_link, self.search_link % clean_title.replace('-', '+'))
-            r = cache.get(client.request, 1, search_url)
-            r = client.parseDOM(r, 'div', {'class': 'col-sm-12'})
-            r = client.parseDOM(r, 'div', {'class': 'col-sm-2.+?'})
-            r1 = client.parseDOM(r, 'h3')
-            r1 = [(client.parseDOM(i, 'a', ret='href')[0], client.parseDOM(i, 'a')[0])for i in r1]
-            y = [re.findall('</i>\s*(\d{4})</span>', i) for i in r]
+            scrape = title.lower().replace(' ','+').replace(':', '')
 
-            items += [(r1[i], y[i]) for i in range(len(y))]
+            start_url = self.search_link %(self.goog,scrape,year)
 
-            r = [(i[0][0], i[1][0], i[0][1]) for i in items if
-                 (cleantitle.get(i[0][1]) == cleantitle.get(title) and i[1][0] == year)]
-            url = r[0][0]
-
-            return url
-        except Exception:
+            html = client.request(start_url)
+            results = re.compile('href="(.+?)"',re.DOTALL).findall(html)
+            for url in results:
+                if self.base_link in url:
+                    if 'webcache' in url:
+                        continue
+                    if cleantitle.get(title) in cleantitle.get(url):
+                        chkhtml = client.request(url)
+                        chktitle = re.compile('<title>(.+?)</title>',re.DOTALL).findall(chkhtml)[0]
+                        if cleantitle.get(title) in cleantitle.get(chktitle):
+                            if year in chktitle:
+                                return url
+            return
+        except:
             return
 
 
     def sources(self, url, hostDict, hostprDict):
         try:
             sources = []
-            url = urlparse.urljoin(self.base_link,url)
-            r = cache.get(client.request, 1, url)
-            try:
-                v = client.parseDOM(r, 'iframe', ret='data-src')[0]
 
-                url = v.split('=')[1]
-                try:
-                    host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
-                    host = client.replaceHTMLCodes(host)
-                    host = host.encode('utf-8')
-                    sources.append({
-                        'source': host,
-                        'quality': 'SD',
-                        'language': 'en',
-                        'url': url.replace('\/', '/'),
-                        'direct': False,
-                        'debridonly': False
-                    })
-                except:
-                    pass
-            except:
-                pass
-            r = client.parseDOM(r, 'tbody')
+            result = client.request(url)
+            res_chk = re.compile('<title>(.+?)</title>',re.DOTALL).findall(result)[0]
+            r = client.parseDOM(result, 'tbody')
             r = client.parseDOM(r, 'tr')
             r = [(re.findall('<td>(.+?)</td>', i)[0], client.parseDOM(i, 'a', ret='href')[0]) for i in r]
 
             if r:
                 for i in r:
                     try:
-                        host = i[0]
-                        url = urlparse.urljoin(self.base_link, i[1])
-                        host = client.replaceHTMLCodes(host)
-                        host = host.encode('utf-8')
-                        if 'other'in host: continue
+                        hostchk = i[0]
+                        if 'other'in hostchk: continue
+
+                        vid_page = urlparse.urljoin(self.base_link, i[1])
+                        html = client.request(vid_page)
+                        vid_div = re.compile('<div class="wrap">(.+?)</div>',re.DOTALL).findall(html)[0]
+                        vid_url = re.compile('href="(.+?)"',re.DOTALL).findall(vid_div)[0]
+                        quality,info = source_utils.get_release_quality(res_chk, vid_url)
+                        host = vid_url.split('//')[1].replace('www.','')
+                        host = host.split('/')[0].lower()
                         sources.append({
                             'source': host,
-                            'quality': 'SD',
+                            'quality': quality,
                             'language': 'en',
-                            'url': url.replace('\/', '/'),
+                            'url':vid_url,
+                            'info':info,
                             'direct': False,
                             'debridonly': False
                         })

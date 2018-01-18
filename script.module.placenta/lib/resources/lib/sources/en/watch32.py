@@ -14,13 +14,12 @@
 # Addon id: plugin.video.placenta
 # Addon Provider: MuadDib
 
-
 import re,json,urllib,urlparse
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import directstream
-
+from resources.lib.modules import source_utils
 
 class source:
     def __init__(self):
@@ -30,7 +29,6 @@ class source:
         self.base_link = 'https://watch32hd.co'
         self.search_link = '/watch?v=%s_%s'
 
-
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
             url = {'imdb': imdb, 'title': title, 'year': year}
@@ -38,7 +36,6 @@ class source:
             return url
         except:
             return
-
 
     def sources(self, url, hostDict, hostprDict):
         try:
@@ -50,34 +47,28 @@ class source:
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
 
             title = data['title'] ; year = data['year']
-
             h = {'User-Agent': client.randomagent()}
-
             v = '%s_%s' % (cleantitle.geturl(title).replace('-', '_'), year)
 
             url = '/watch?v=%s' % v
             url = urlparse.urljoin(self.base_link, url)
 
-            #c = client.request(url, headers=h, output='cookie')
-            #c = client.request(urlparse.urljoin(self.base_link, '/av'), cookie=c, output='cookie', headers=h, referer=url)
-            #c = client.request(url, cookie=c, headers=h, referer=url, output='cookie')
+            html = client.request(url, headers=h, referer=url)
+            varid = re.compile('var frame_url = "(.+?)"',re.DOTALL).findall(html)[0].replace('/embed/','/streamdrive/info/')
 
-            post = urllib.urlencode({'v': v})
-            u = urlparse.urljoin(self.base_link, '/video_info/iframe')
-
-            #r = client.request(u, post=post, cookie=c, headers=h, XHR=True, referer=url)
-            r = client.request(u, post=post, headers=h, XHR=True, referer=url)
-            r = json.loads(r).values()
-            r = [urllib.unquote(i.split('url=')[-1])  for i in r]
-
-            for i in r:
-                try: sources.append({'source': 'gvideo', 'quality': directstream.googletag(i)[0]['quality'], 'language': 'en', 'url': i, 'direct': True, 'debridonly': False})
-                except: pass
-
+            res_chk = re.compile('class="title"><h1>(.+?)</h1>',re.DOTALL).findall(html)[0]
+            varid = 'http:'+varid
+            holder = client.request(varid, headers=h)
+            links = re.compile('"src":"(.+?)"',re.DOTALL).findall(holder)
+                        
+            for vid_url in links:
+                vid_url = vid_url.replace('\\','')
+                vid_url = urlparse.urljoin('https://vidlink.org', vid_url)
+                quality,info = source_utils.get_release_quality(res_chk, vid_url)
+                sources.append({'source': 'VidLink', 'quality': str(quality), 'language': 'en', 'url': vid_url, 'info': info, 'direct': False, 'debridonly': False})
             return sources
         except:
             return sources
-
 
     def resolve(self, url):
         return directstream.googlepass(url)
