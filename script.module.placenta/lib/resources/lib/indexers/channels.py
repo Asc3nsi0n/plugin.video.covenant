@@ -39,7 +39,7 @@ class channels:
         self.lang = control.apiLanguage()['trakt']
 
         self.sky_now_link = 'http://epgservices.sky.com/5.1.1/api/2.0/channel/json/%s/now/nn/0'
-        self.sky_programme_link = 'http://tv.sky.com/programme/channel/%s/%s/%s.json'
+        self.sky_programme_link = 'http://tv.sky.com/programme/channel/|channel|/|urldate|/|subpage|.json'
 
 
     def get(self):
@@ -237,7 +237,7 @@ class channels:
                 meta.update({'tmdb_id': tmdb})
                 meta.update({'mediatype': 'movie'})
                 meta.update({'trailer': '%s?action=trailer&name=%s' % (sysaddon, sysname)})
-                #meta.update({'trailer': 'plugin://script.extendedinfo/?info=playtrailer&&id=%s' % imdb})
+                meta.update({'trailer': 'plugin://script.extendedinfo/?info=playtrailer&&id=%s' % imdb})
                 meta.update({'playcount': 0, 'overlay': 6})
                 try: meta.update({'genre': cleangenre.lang(meta['genre'], self.lang)})
                 except: pass

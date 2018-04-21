@@ -24,7 +24,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['afdah.to']
-        self.base_link = 'http://afdah.to/'
+        self.base_link = 'http://afdah.to'
         self.search_link = '%s/search?q=afdah.to+%s+%s'
         self.goog = 'https://www.google.co.uk'
 

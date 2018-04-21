@@ -10,7 +10,7 @@
 
 # Addon Name: Placenta
 # Addon id: plugin.video.placenta
-# Addon Provider: MuadDib
+# Addon Provider: Mr.Blamo
 
 import re, urlparse, urllib, base64
 
@@ -25,7 +25,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['123netflix.com']
-        self.base_link = 'http://123netflix.com'
+        self.base_link = 'http://123netflix.unblockall.org'
         self.search_link = '/search-movies/%s.html'
 
 

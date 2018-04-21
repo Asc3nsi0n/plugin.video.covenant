@@ -10,7 +10,7 @@
 
 # Addon Name: Placenta
 # Addon id: plugin.video.placenta
-# Addon Provider: MuadDib
+# Addon Provider: Mr.Blamo
 
 import re,traceback,urlparse,urllib,base64
 
@@ -26,8 +26,8 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['vodly.us', 'vodly.unblocked.tv']
-        self.base_link = 'http://vodly.us'
-        self.search_link = '%s/search?q=vodly.us+%s+%s'
+        self.base_link = 'http://watch32.is'
+        self.search_link = '%s/search?q=watch32.is+%s+%s'
         self.goog = 'https://www.google.co.uk'
 
     def movie(self, imdb, title, localtitle, aliases, year):

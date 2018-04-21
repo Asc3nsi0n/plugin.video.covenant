@@ -10,7 +10,7 @@
 
 # Addon Name: Placenta
 # Addon id: plugin.video.placenta
-# Addon Provider: MuadDib
+# Addon Provider: Mr.Blamo
 
 
 
@@ -24,8 +24,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['dl.newmyvideolink.xyz','newmyvideolink.xyz', 'beta.myvideolinks.xyz', 'videolinks.ga', 'myvideolinks.ga', 'ezfile.xyz', 'newmyvideolinks.ga']
-        self.base_link = 'http://dl.newmyvideolink.xyz'
+        self.domains = ['go.myvideolinks.net','newmyvideolink.xyz', 'beta.myvideolinks.xyz', 'videolinks.ga', 'myvideolinks.ga', 'ezfile.xyz', 'newmyvideolinks.ga']
+        self.base_link = 'http://go.myvideolinks.net'
         self.search_link = '/?s=%s'
 
 

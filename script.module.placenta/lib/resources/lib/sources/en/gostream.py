@@ -10,7 +10,7 @@
 
 # Addon Name: Placenta
 # Addon id: plugin.video.placenta
-# Addon Provider: MuadDib
+# Addon Provider: Mr.Blamo
 
 
 import re,urllib,urlparse,time,json
@@ -26,7 +26,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['gostream.is','gomovies.to','gomovies.pet']
-        self.base_link = 'https://gostream.is'
+        self.base_link = 'https://123movieshub.sc'
         self.search_link = '/movie/search/%s'
         self.user = control.setting('gostream.user')
         self.password = control.setting('gostream.pass')

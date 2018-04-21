@@ -26,7 +26,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['movie4u.ch']
-        self.base_link = 'https://movie4u.ch'
+        self.base_link = 'https://movie4u.live'
         self.search_link = '/?s=%s'
 
 

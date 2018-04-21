@@ -25,7 +25,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['1080pmovie.com']
-        self.base_link = 'https://1080pmovie.com'
+        self.base_link = 'https://watchhdmovie.net'
         self.search_link = '%s/wp-json/wp/v2/posts?search=%s'
 
     def movie(self, imdb, title, localtitle, aliases, year):
