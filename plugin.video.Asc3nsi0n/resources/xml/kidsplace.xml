@@ -1,0 +1,38 @@
+
+
+<plugin>
+  <title>Youtube Kids</title>
+  <link>plugin://plugin.video.Asc3nsi0n/?action=youtubekids</link>
+  <thumbnail>special://home/addons/script.Asc3nsi0n.artwork/resources/media/kids/ytkids.png</thumbnail> 
+</plugin>
+
+<plugin>
+  <title>Popular Kids Shows</title>
+  <link>plugin://plugin.video.Asc3nsi0n/?action=kidspopular</link>
+  <thumbnail>special://home/addons/script.Asc3nsi0n.artwork/resources/media/kids/popular.png</thumbnail>  
+</plugin>
+
+<plugin>
+  <title>Big Cartoon List</title>
+  <link>plugin://script.module.Asc3nsi0n/?mode=51&url=http://www.toonget.net/cartoon</link>
+  <thumbnail>special://home/addons/script.Asc3nsi0n.artwork/resources/media/kids/cartoons.png</thumbnail>
+</plugin>
+
+<plugin>
+  <title>Animation Movies</title>
+  <link>plugin://plugin.video.Asc3nsi0n/?action=movies&url=http%3a%2f%2fwww.imdb.com%2fsearch%2ftitle%3ftitle_type%3dfeature%2ctv_movie%2cdocumentary%26num_votes%3d100%2c%26release_date%3d%2cdate%5b0%5d%26genres%3danimation%26sort%3dmoviemeter%2casc%26count%3d40%26start%3d1</link>
+  <thumbnail>special://home/addons/script.Asc3nsi0n.artwork/resources/media/kids/animation.png</thumbnail>   
+</plugin>
+
+<plugin>
+  <title>Disney Movies</title>
+   <link>plugin://plugin.video.Asc3nsi0n/?action=movies&url=disney</link>
+  <!--link>plugin://script.module.Asc3nsi0n/?mode=58&url=http://www.freecartoonszone.info/p/list-of-disney-movies-z.html</link-->
+  <thumbnail>special://home/addons/script.Asc3nsi0n.artwork/resources/media/kids/disney.png</thumbnail>   
+</plugin>
+
+<plugin>
+  <title>Family Movies</title>
+  <link>plugin://plugin.video.Asc3nsi0n/?action=movies&url=http%3a%2f%2fwww.imdb.com%2fsearch%2ftitle%3ftitle_type%3dfeature%2ctv_movie%2cdocumentary%26num_votes%3d100%2c%26release_date%3d%2cdate%5b0%5d%26genres%3dfamily%26sort%3dmoviemeter%2casc%26count%3d40%26start%3d1</link>
+  <thumbnail>special://home/addons/script.Asc3nsi0n.artwork/resources/media/kids/family.png</thumbnail>   
+</plugin>

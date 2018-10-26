@@ -70,6 +70,10 @@ if action == None:
     cache.cache_version_check()
     navigator.navigator().root()
 
+elif action == 'newsNavigator':
+    from resources.lib.indexers import navigator
+    navigator.navigator().news_local()
+
 elif action == "furkNavigator":
     from resources.lib.indexers import navigator
     navigator.navigator().furk()
@@ -149,6 +153,14 @@ elif action == 'clearCache':
 elif action == 'clearCacheSearch':
     from resources.lib.indexers import navigator
     navigator.navigator().clearCacheSearch()
+
+elif action == 'clearAllCache':
+    from resources.lib.indexers import navigator
+    navigator.navigator().clearCacheAll()
+
+elif action == 'clearMetaCache':
+    from resources.lib.indexers import navigator
+    navigator.navigator().clearCacheMeta()
     
 elif action == 'infoCheck':
     from resources.lib.indexers import navigator

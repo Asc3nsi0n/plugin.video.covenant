@@ -1,0 +1,14 @@
+
+<plugin>
+  <name>XXX-O-DUS</name>
+  <link>plugin://script.module.xxx-o-dus/</link>
+  <thumbnail>https://github.com/kodil/kodil/blob/master/repo/plugin.video.xxx-o-dus/icon.png?raw=true</thumbnail>
+  <fanart>special://home/addons/script.module.xxx-o-dus/fanart.jpg</fanart>
+</plugin>
+
+<plugin>
+  <title>XVIDEOS</title>
+  <link>plugin://plugin.video.Asc3nsi0n/?action=xvideos</link>
+  <thumbnail>https://seeklogo.com/images/X/xvideos-logo-77E7B4F168-seeklogo.com.png</thumbnail>
+  <fanart>special://home/addons/script.Asc3nsi0n.artwork/resources/media/misc/fanart.jpg</fanart>
+</plugin>
