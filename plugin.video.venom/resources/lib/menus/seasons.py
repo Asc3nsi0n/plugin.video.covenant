@@ -4,7 +4,8 @@
 	Venom Add-on
 '''
 
-import os, sys, re, json, zipfile
+# import os, sys, re, json, zipfile
+import sys, re, json, zipfile
 import StringIO, urllib, urllib2, urlparse, datetime
 
 from resources.lib.modules import trakt
@@ -959,6 +960,12 @@ class Seasons:
 
 				item = control.item(label = label)
 
+				if 'castandart' in i:
+					item.setCast(i['castandart'])
+
+				if 'episodeIDS' in i:
+					item.setUniqueIDs(i['episodeIDS'])
+
 				unwatchedEnabled = control.setting('tvshows.unwatched.enabled')
 				unwatchedLimit = False
 				seasoncountEnabled = control.setting('tvshows.seasoncount.enabled')
@@ -979,16 +986,11 @@ class Seasons:
 							# total_seasons = total_seasons - 1
 						item.setProperty('TotalSeasons', str(total_seasons))
 
-				if 'episodeIDS' in i:
-					item.setUniqueIDs(i['episodeIDS'])
-
-				if 'castandart' in i:
-					item.setCast(i['castandart'])
-
 				# if fanart != '0' and fanart is not None:
 					# item.setProperty('Fanart_Image', fanart)
 
 				item.setArt(art)
+				item.setProperty('IsPlayable', 'false')
 				item.setInfo(type='video', infoLabels=control.metadataClean(meta))
 				item.addContextMenuItems(cm)
 				video_streaminfo = {'codec': 'h264'}

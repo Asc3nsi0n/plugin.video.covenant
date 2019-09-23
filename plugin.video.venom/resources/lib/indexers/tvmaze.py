@@ -212,7 +212,6 @@ class tvshows:
 
 		self.tvmaze_link = 'http://www.tvmaze.com'
 		self.tvmaze_info_link = 'http://api.tvmaze.com/shows/%s?embed=cast'
-
 		# self.tvdb_key = control.setting('tvdb.user')
 		# if self.tvdb_key == '' or self.tvdb_key is None:
 			# self.tvdb_key = '1D62F2F90030C444'
@@ -424,11 +423,9 @@ class tvshows:
 					meta = {}
 					meta = {'tmdb': tmdb, 'imdb': imdb, 'tvdb': tvdb, 'lang': self.lang, 'user': self.user, 'item': item}
 
-				# fanart_thread = threading.Thread
 				if self.disable_fanarttv != 'true':
 					from resources.lib.indexers import fanarttv
 					extended_art = fanarttv.get_tvshow_art(tvdb)
-
 					if extended_art is not None:
 						item.update(extended_art)
 						meta.update(item)

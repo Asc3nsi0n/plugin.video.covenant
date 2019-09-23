@@ -66,7 +66,6 @@ class Episodes:
 		self.tvmaze_link = 'http://api.tvmaze.com'
 		self.added_link = 'http://api.tvmaze.com/schedule'
 		self.calendar_link = 'http://api.tvmaze.com/schedule?date=%s'
-		# self.calendar_link = 'http://api.tvmaze.com/schedule?date=%s&embed=cast'
 
 		self.showunaired = control.setting('showunaired') or 'true'
 		self.unairedcolor = control.setting('unaired.identify')
@@ -132,7 +131,6 @@ class Episodes:
 			if attribute > 0:
 				if attribute == 1:
 					try:
-						# self.list = sorted(self.list, key=lambda k: k['tvshowtitle'].lower(), reverse=reverse)
 						self.list = sorted(self.list, key=lambda k: re.sub('(^the |^a |^an )', '', k['tvshowtitle'].lower()), reverse=reverse)
 					except:
 						self.list = sorted(self.list, key=lambda k: k['title'].lower(), reverse=reverse)
@@ -814,7 +812,6 @@ class Episodes:
 			# writer = client.replaceHTMLCodes(writer)
 			# writer = writer.encode('utf-8')
 
-
 				import xml.etree.ElementTree as ET
 				tree = ET.ElementTree(ET.fromstring(actors))
 				root = tree.getroot()
@@ -843,12 +840,12 @@ class Episodes:
 				plot = client.replaceHTMLCodes(plot)
 
 				values = {'title': title, 'seasoncount': seasoncount, 'season': season, 'episode': episode,
-							'year': year, 'tvshowtitle': tvshowtitle, 'tvshowyear': tvshowyear, 'premiered': premiered,
-							'added': added, 'lastplayed': lastplayed, 'status': status, 'studio': studio, 'genre': genre,
-							'duration': duration, 'rating': rating, 'votes': votes, 'mpaa': mpaa, 'director': director,
-							'writer': writer, 'castandart': castandart, 'plot': plot, 'imdb': imdb, 'tmdb': tmdb, 'tvdb': tvdb, 'poster': poster,
-							'banner': banner, 'fanart': fanart, 'thumb': thumb, 'snum': i['snum'], 'enum': i['enum'],
-							'unaired': unaired, 'episodeIDS': episodeIDS}
+								'year': year, 'tvshowtitle': tvshowtitle, 'tvshowyear': tvshowyear, 'premiered': premiered,
+								'added': added, 'lastplayed': lastplayed, 'status': status, 'studio': studio, 'genre': genre,
+								'duration': duration, 'rating': rating, 'votes': votes, 'mpaa': mpaa, 'director': director,
+								'writer': writer, 'castandart': castandart, 'plot': plot, 'imdb': imdb, 'tmdb': tmdb, 'tvdb': tvdb,
+								'poster': poster, 'banner': banner, 'fanart': fanart, 'thumb': thumb, 'snum': i['snum'],
+								'enum': i['enum'], 'unaired': unaired, 'episodeIDS': episodeIDS}
 
 				values['action'] = 'episodes'
 				if 'airday' in i and i['airday'] is not None and i['airday'] != '':
@@ -1201,6 +1198,8 @@ class Episodes:
 			items = json.loads(result)
 		except:
 			return
+
+		# log_utils.log('items = %s' % items, __name__, log_utils.LOGDEBUG)
 
 		for item in items:
 			try:
@@ -1668,6 +1667,12 @@ class Episodes:
 
 				item = control.item(label=labelProgress)
 
+				if 'castandart' in i:
+					item.setCast(i['castandart'])
+
+				if 'episodeIDS' in i:
+					item.setUniqueIDs(i['episodeIDS'])
+
 				unwatchedEnabled = control.setting('tvshows.unwatched.enabled')
 				unwatchedLimit = False
 				seasoncountEnabled = control.setting('tvshows.seasoncount.enabled')
@@ -1678,12 +1683,6 @@ class Episodes:
 						item.setProperty('TotalEpisodes', str(count['total']))
 						item.setProperty('WatchedEpisodes', str(count['watched']))
 						item.setProperty('UnWatchedEpisodes', str(count['unwatched']))
-
-				if 'episodeIDS' in i:
-					item.setUniqueIDs(i['episodeIDS'])
-
-				if 'castandart' in i:
-					item.setCast(i['castandart'])
 
 				# if fanart != '0' and not fanart is None:
 					# item.setProperty('Fanart_Image', fanart)

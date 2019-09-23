@@ -824,16 +824,6 @@ class TVshows:
 				director = client.replaceHTMLCodes(director)
 				director = director.encode('utf-8')
 
-				# try:
-					# cast = re.findall('Stars(?:s|):(.+?)(?:\||</div>)', item)[0]
-				# except:
-					# cast = '0'
-				# cast = client.replaceHTMLCodes(cast)
-				# cast = cast.encode('utf-8')
-				# cast = client.parseDOM(cast, 'a')
-				# if cast == []:
-					# cast = '0'
-
 				plot = '0'
 				try:
 					plot = client.parseDOM(item, 'p', attrs = {'class': 'text-muted'})[0]
@@ -1409,7 +1399,10 @@ class TVshows:
 				cm.append(('[COLOR red]Venom Settings[/COLOR]', 'RunPlugin(%s?action=openSettings&query=0.0)' % sysaddon))
 ####################################
 
-				item = control.item(label = label)
+				item = control.item(label=label)
+
+				if 'castandart' in i:
+					item.setCast(i['castandart'])
 
 				unwatchedEnabled = control.setting('tvshows.unwatched.enabled')
 				unwatchedLimit = False
@@ -1431,12 +1424,10 @@ class TVshows:
 							# total_seasons = total_seasons - 1
 						item.setProperty('TotalSeasons', str(total_seasons))
 
-				if 'castandart' in i:
-					item.setCast(i['castandart'])
-
 				# if fanart != '0' and fanart is not None:
 					# item.setProperty('Fanart_Image', fanart)
 				item.setArt(art)
+				item.setProperty('IsPlayable', 'false')
 				item.setInfo(type='video', infoLabels=control.metadataClean(meta))
 				video_streaminfo = {'codec': 'h264'}
 				item.addStreamInfo('video', video_streaminfo)
